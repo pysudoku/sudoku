@@ -57,11 +57,6 @@ if __name__ == '__main__':
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
     
-    #Algotithm solver = new PeterNorvigSolver()
-    #solver = PeterNorvigAlgorithm()
-    #solution = solver.solve(grid)
-    #print(solution)
-    
     factory = AlgorithmFactory(AlgorithmType.PETER_NORVIG)
     alg = factory.getAlgorithm()
     solution = alg.solve(grid)
