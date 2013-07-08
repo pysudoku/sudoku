@@ -5,7 +5,7 @@ Created on Jul 3, 2013
 '''
 from sudoku.algorithm.AlgorithmType import AlgorithmType
 from sudoku.algorithm.PeterNorvigAlgorithm import PeterNorvigAlgorithm
-from sudoku.algorithm.backtracking import BacktrackingAlgorithm
+from sudoku.algorithm.backtrackingAdapter import BacktrackingAdapter
 from sudoku.algorithm.recursive import Recursive
 
 class AlgorithmFactory(object):
@@ -23,7 +23,7 @@ class AlgorithmFactory(object):
         if(self.settings == AlgorithmType.PETER_NORVIG):
             return PeterNorvigAlgorithm()
         if(self.settings == AlgorithmType.BACK_TRACKING):
-            return BacktrackingAlgorithm()
+            return BacktrackingAdapter()
         
         if(self.settings == AlgorithmType.RECURSIVE):
             return Recursive()

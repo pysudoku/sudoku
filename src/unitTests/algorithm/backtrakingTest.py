@@ -1,11 +1,13 @@
+import sys
+sys.path.append("../../../src")
 import unittest
-from sudoku.algorithm import backtracking
-from sudoku.algorithm.backtracking import BacktrackingAlgorithm
+from sudoku.algorithm.backTrackingAdapter import BackTrackingAdapter
+from sudoku.algorithm.exceptions.InvalidSudokuException import InvalidSudokuException
 import collections
 
 class TestBacktracking(unittest.TestCase):
     def setUp(self):
-        self.alg = BacktrackingAlgorithm()
+        self.alg = BackTrackingAdapter()
         self.easy_initialGrid = {
             "A1":'.', "A2":'6', "A3":'7', "A4":'.', "A5":'4', "A6":'.', "A7":'.', "A8":'.', "A9":'2',
             "B1":'9', "B2":'.', "B3":'.', "B4":'7', "B5":'3', "B6":'.', "B7":'4', "B8":'5', "B9":'.',
@@ -73,28 +75,16 @@ class TestBacktracking(unittest.TestCase):
             "I1":'2', "I2":'5', "I3":'7', "I4":'3', "I5":'4', "I6":'9', "I7":'8', "I8":'6', "I9":'1'
             }
 
-
-    def test_to_verify_if_easy_sudoku_was_solved(self):        
+    def test_to_verify_if_easy_sudoku_was_solved(self):
         solution = self.alg.solve(self.easy_initialGrid)
         self.assertEqual(self.easy_expectedGrid, solution)
-
-'''
-    def test_to_verify_if_medium_sudoku_was_solved(self):
-        lista_inicial_del_diccionario= self.alg.dict_to_list(self.intermediate_initialGrid)
-        solution = self.alg.resuelve(lista_inicial_del_diccionario)
-        print(collections.OrderedDict(solution))
-        print(collections.OrderedDict(self.intermediate_expectedGrid))
+    def test_to_verify_if_intermediate_sudoku_was_solved(self):
+        solution = self.alg.solve(self.intermediate_initialGrid)
         self.assertEqual(self.intermediate_expectedGrid, solution)
-
-
-    def test_to_verify_if_difficult_sudoku_was_solved(self):
-        lista_inicial_del_diccionario= self.alg.dict_to_list(self.advanced_initialGrid)
-        solution = self.alg.resuelve(lista_inicial_del_diccionario)
+    def test_to_verify_if_advanced_sudoku_was_solved(self):
+        solution = self.alg.solve(self.advanced_initialGrid)
         self.assertEqual(self.advanced_expectedGrid, solution)
-'''
-    #def test_column_is_negative_if_maxColumna_has_been_exceded(self):
-     #   self.posicion=Posicion(9,9)
-      #  self.assertEqual()
+
 
 if __name__ == '__main__':
     unittest.main()
