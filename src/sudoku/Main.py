@@ -3,6 +3,8 @@ Created on Jul 3, 2013
 
 @author: Jimena Terceros
 '''
+import sys
+sys.path.append("../../src")
 from sudoku.algorithm.AlgorithmFactory import AlgorithmFactory
 from sudoku.algorithm.AlgorithmType import AlgorithmType
 
