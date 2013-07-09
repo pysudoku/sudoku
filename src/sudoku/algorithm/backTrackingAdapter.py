@@ -1,6 +1,6 @@
 from sudoku.algorithm.Algorithm import Algorithm
 from sudoku.algorithm.backtrackingAlgorithm import BacktrackingAlgorithm
-class BackTrackingAdapter(object):
+class BackTrackingAdapter(Algorithm):
     """
     BackTracking is a class convert the sudoku from dictionary into a List of list structure.
     When sudoku is solved then this class also convert the sudoku solved into a Dictionary
@@ -18,11 +18,8 @@ class BackTrackingAdapter(object):
         @return: a Dictionary with the sudoku solved
         """
         sudokuMatrix = self.dict_to_list(sudokuDic)
-        print("Received Sudoku")
-        print(sudokuMatrix)
+        
         resolvedSudokuMatrix  = self.backtrackingAlgorithm.solve(sudokuMatrix)
-        print("Resolved Sudoku")
-        print(resolvedSudokuMatrix)
         return self.list_to_dict(resolvedSudokuMatrix)
 
 
