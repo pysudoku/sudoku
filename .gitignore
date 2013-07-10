@@ -1,0 +1,22 @@
+# PYC Files #
+*.pyc
+
+# TXT Files#
+*.txt
+
+# CSV Files #
+*.csv
+
+# Directory 
+*/__pycache__/*
+*htmlcov*
+
+#binaries
+.coverage
+
+# Exclude sudoku pyc
+!/src/sudocu/*.pyc
+
+# Build directories
+/src/sudoku/__pycache__
+/src/unitTests/writer/__pycache__

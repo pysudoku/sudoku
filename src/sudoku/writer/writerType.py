@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Name:        module2
+# Name:        WriterType
 # Purpose:
 #
 # Author:      Ines Baina
@@ -8,13 +8,12 @@
 # Copyright:   (c) Ines Baina 2013
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
-from abc import abstractmethod
 
-class Writer(object):
-    def __init__(self):
-        pass
-    @abstractmethod
-    def write(self,sudoku,filename_user):
-        """
-        Write abstract method
-        """
+class WriterType(object):
+    '''
+    classdocs
+    '''
+    TXT = "txt"
+    CSV = "csv"
+    CONSOLE = "console"
+        
