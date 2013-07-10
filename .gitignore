@@ -20,3 +20,6 @@
 # Build directories
 /src/sudoku/__pycache__
 /src/unitTests/writer/__pycache__
+/corruptedSettings.xml
+/invalidSettings.xml
+/settings.xml
