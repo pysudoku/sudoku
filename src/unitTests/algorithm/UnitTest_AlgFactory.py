@@ -7,8 +7,8 @@ import unittest
 from sudoku.algorithm.AlgorithmFactory import AlgorithmFactory
 from sudoku.algorithm.AlgorithmType import AlgorithmType
 from sudoku.algorithm.PeterNorvigAlgorithm import PeterNorvigAlgorithm
-from sudoku.algorithm.backtracking import BacktrackingAlgorithm
 from sudoku.algorithm.recursive import Recursive
+from sudoku.algorithm.backTrackingAdapter import BackTrackingAdapter
 
 class TestAlgFactory(unittest.TestCase):
 
@@ -24,7 +24,7 @@ class TestAlgFactory(unittest.TestCase):
         
     def test_having_setttings_for_peter_the_factory_should_return_backtracking_algorithm(self):
         alg = self.factoryBacktracking.getAlgorithm()
-        self.assertEqual(BacktrackingAlgorithm, type(alg))
+        self.assertEqual(BackTrackingAdapter, type(alg))
         
     def test_having_setttings_for_peter_the_factory_should_return_recursive_algorithm(self):
         alg = self.factoryRecursive.getAlgorithm()

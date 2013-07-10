@@ -9,7 +9,7 @@ from coverage import coverage
 cov = coverage(omit=['*__.py', '*test*.py'])
 cov.start()
 
-from unitTests.algorithm.backtraking_test import TestBacktracking
+from unitTests.algorithm.backtrakingTest import TestBacktracking
 from unitTests.algorithm.UniTest_algPeter import TestAlgPeter
 from unitTests.algorithm.test_recursive import Test_Recursive
 from unitTests.algorithm.UnitTest_AlgFactory import TestAlgFactory
