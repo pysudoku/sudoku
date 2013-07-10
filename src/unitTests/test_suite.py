@@ -16,6 +16,8 @@ from unitTests.algorithm.UnitTest_AlgFactory import TestAlgFactory
 from unitTests.settings.TestSettingsReader import TestSettingsReader
 from unitTests.settings.TestSettings import TestSettings
 from unitTests.settings.Test_Level import TestLevel
+from unitTests.writer.displayCMDTest import TestDisplayCMD
+from unitTests.writer.writerTest import TestWriter
 
 def main():
     suite = unittest.TestSuite()
@@ -26,6 +28,8 @@ def main():
     suite.addTest(unittest.makeSuite(TestSettingsReader))
     suite.addTest(unittest.makeSuite(TestSettings))
     suite.addTest(unittest.makeSuite(TestLevel))
+    suite.addTest(unittest.makeSuite(TestDisplayCMD))
+    suite.addTest(unittest.makeSuite(TestWriter))
 
     unittest.TextTestRunner(verbosity = 2).run(suite)
     

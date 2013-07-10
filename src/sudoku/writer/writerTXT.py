@@ -9,6 +9,7 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 from sudoku.writer.writer import Writer
+import os.path
 import datetime
 import time
 import string
@@ -26,8 +27,17 @@ class WriterTXT(Writer):
             for column in self.column_labels:
                 string_representation += '.' if grid[row + column] == '.' else grid[row + column]
         return string_representation
-    def write(self,sudoku):
-        new_file = open(self.filename(), 'w')
+    def write(self,sudoku,filename_user):
+        
+        # c:/sudoku>exe d:/sudoku/sud.txt  ---output d:/sudoku/sud.txt
+        # c:/sudoku>exe sud.txt ---output c:/sudoku/sud.txt
+        """if (os.path.isfile(filename_user)):
+            new_file = open(filename_user, 'w')
+        else:
+            new_file = open(self.filename(), 'w')
+            """
+        new_file = open(filename_user, 'w')
+        
         str_result = self.dict_to_str(sudoku)
         barra=""
         for i in range(0,8):

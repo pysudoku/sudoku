@@ -10,6 +10,7 @@
 #-------------------------------------------------------------------------------
 
 from sudoku.writer.writer import Writer
+import os.path
 import datetime
 import time
 import string
@@ -27,8 +28,13 @@ class WriterCSV(Writer):
             for column in self.column_labels:
                 string_representation += '0' if grid[row + column] == '.' else grid[row + column]
         return string_representation
-    def write(self,sudoku):
-        new_file = open(self.filename(), 'w')
+    def write(self,sudoku,filename_user):
+        """if os.path.isfile(filename_user):
+            new_file = open(filename_user, 'w')
+        else:
+            new_file = open(self.filename(), 'w')
+            """
+        new_file = open(filename_user, 'w')
         str_result = self.dict_to_str(sudoku)
         n=9
         rownumbers=[str_result[i:i+n]for i in range(0, len(str_result), n)]
@@ -57,5 +63,4 @@ class WriterCSV(Writer):
         return stringname
 
 
-    def serialize(self,sudoku): #override
-        return True
+    

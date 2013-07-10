@@ -73,3 +73,5 @@ if __name__ == '__main__':
     alg = factory.getAlgorithm()
     solution = alg.solve(grid)
     print(solution)
+    
+    

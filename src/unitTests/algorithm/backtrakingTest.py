@@ -1,5 +1,5 @@
-import sys
-sys.path.append("../../../src")
+#import sys
+#sys.path.append("../../../src")
 import unittest
 from sudoku.algorithm.backTrackingAdapter import BackTrackingAdapter
 from sudoku.algorithm.exceptions.InvalidSudokuException import InvalidSudokuException
