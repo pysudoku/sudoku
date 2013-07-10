@@ -9,5 +9,7 @@ from abc import abstractmethod
 class Algorithm(object):
     
     @abstractmethod
-    def solve(self, grid): pass
-        
+    def solve(self, grid):
+        """
+        This is an abstract function.
+        """
