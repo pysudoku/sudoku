@@ -10,7 +10,7 @@ from sudoku.algorithm.PeterNorvigAlgorithm import PeterNorvigAlgorithm
 from sudoku.algorithm.backtracking import BacktrackingAlgorithm
 from sudoku.algorithm.recursive import Recursive
 
-class Test(unittest.TestCase):
+class TestAlgFactory(unittest.TestCase):
 
     def setUp(self):
         # create a setting with algorithm type PETER
