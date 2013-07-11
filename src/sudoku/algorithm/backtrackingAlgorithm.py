@@ -2,6 +2,7 @@
 
 
 from sudoku.algorithm.position import Position
+from sudoku.algorithm.exceptions import InvalidSudokuException
 
 class BacktrackingAlgorithm:
     """
@@ -63,31 +64,7 @@ class BacktrackingAlgorithm:
             pos.sig()
 
         resolvedSudoku = self.updateSudoku(sudoku,pilaActual)
-        if not resolvedSudoku:
-            raise InvalidSudokuException()
-        else:
-            return resolvedSudoku
-
-    def exist_row_column(self, sudoku,asignadas, num, linea, col):
-        """existe is a function to verify if the number exists in row or column
-
-        @param sudoku:
-        @param encontrado:
-        @param LINEAS:
-        @param COLUMNAS:
-        @return: a boolean if number exists in row or column could be True or False
-        """
-        encontrado = False
-        for l in range(0,self.LINEAS):
-            if sudoku[l][col] == num:
-                encontrado = True
-                break
-
-        for c in range(0,self.COLUMNAS):
-            if sudoku[linea][c] == num:
-                encontrado = True
-                break
-        return encontrado
+        return resolvedSudoku
 
     def prueba(self, sudoku, asignadas, fila, col):
         """prueba is a function to verify if the number exists in row or column

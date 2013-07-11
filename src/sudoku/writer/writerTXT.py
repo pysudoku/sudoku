@@ -27,16 +27,19 @@ class WriterTXT(Writer):
             for column in self.column_labels:
                 string_representation += '.' if grid[row + column] == '.' else grid[row + column]
         return string_representation
+        
+            
     def write(self,sudoku,filename_user):
         
         # c:/sudoku>exe d:/sudoku/sud.txt  ---output d:/sudoku/sud.txt
         # c:/sudoku>exe sud.txt ---output c:/sudoku/sud.txt
-        """if (os.path.isfile(filename_user)):
-            new_file = open(filename_user, 'w')
+        
+        if os.path.isfile(filename_user):
+            #file exists then rename it
+            new_file = open(self.createNewFilename(), 'w')
         else:
-            new_file = open(self.filename(), 'w')
-            """
-        new_file = open(filename_user, 'w')
+            #file does not exist, lets create it
+            new_file = open(filename_user, 'w')
         
         str_result = self.dict_to_str(sudoku)
         barra=""
@@ -61,7 +64,7 @@ class WriterTXT(Writer):
         new_file.close()
         return True
 
-    def filename(self):
+    def createNewFilename(self):
         now = datetime.datetime.now()
         now=now.replace(microsecond=0)
         now=now.strftime("%B %d, %Y")
@@ -75,5 +78,3 @@ class WriterTXT(Writer):
         return stringname
 
 
-    def serialize(self,sudoku): #override
-        return True
