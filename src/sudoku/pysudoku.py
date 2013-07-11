@@ -34,9 +34,9 @@ def main():
     algorithm_toSolve=''
     typeOutput=''
     ofile=''
-    dir_path=''
+    
     try:
-        myopts, args = getopt.getopt(sys.argv[1:],"i:a:w:o:p:")
+        myopts, args = getopt.getopt(sys.argv[1:],"i:a:w:o:")
     except getopt.GetoptError as e:
         print (str(e))
         print("Usage: %s -i input -a algorithm -w typeOfoutput -o output" % sys.argv[0])
@@ -51,8 +51,6 @@ def main():
                 typeOutput=a                
         elif o == '-o':
                 ofile=a
-        elif o == '-p':
-                dir_path=a
                 
     if algorithm_toSolve=="PETER_NORVIG":
         factory = AlgorithmFactory(AlgorithmType.PETER_NORVIG)
