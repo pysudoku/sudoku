@@ -19,6 +19,7 @@ from unitTests.settings.Test_Level import TestLevel
 from unitTests.writer.displayCMDTest import TestDisplayCMD
 from unitTests.writer.writerTest import TestWriter
 from unitTests.reader.test_txtparser import TestTXTParser
+from unitTests.reader.test_csvparser import TestCSVParser
 
 def main():
     suite = unittest.TestSuite()
@@ -32,6 +33,7 @@ def main():
     suite.addTest(unittest.makeSuite(TestDisplayCMD))
     suite.addTest(unittest.makeSuite(TestWriter))
     suite.addTest(unittest.makeSuite(TestTXTParser))
+    suite.addTest(unittest.makeSuite(TestCSVParser))
 
     unittest.TextTestRunner(verbosity = 2).run(suite)
     
