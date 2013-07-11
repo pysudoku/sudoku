@@ -34,15 +34,15 @@ class TestWriter(unittest.TestCase):
             "H1":'.', "H2":'.', "H3":'.', "H4":'6', "H5":'5', "H6":'7', "H7":'8', "H8":'.', "H9":'4',
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
-        writer=WriterTXT()
+        writer = WriterTXT()
 
         writer.write(sudoku, "file2.txt")
         
-        exist=False
+        exist = False
         for file in os.listdir("."):
             if file == "file2.txt":
-                exist=True
-        self.assertEqual(True,exist)
+                exist = True
+        self.assertEqual(True, exist)
 
     def test_to_verify_if_write_method_in_writerCSV_create_a_fileCSV(self):
         sudoku = {
@@ -56,14 +56,14 @@ class TestWriter(unittest.TestCase):
             "H1":'.', "H2":'.', "H3":'.', "H4":'6', "H5":'5', "H6":'7', "H7":'8', "H8":'.', "H9":'4',
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
-        writer=WriterCSV()
+        writer = WriterCSV()
 
         writer.write(sudoku, "file3.csv")
-        exist=False
+        exist = False
         for file in os.listdir("."):
             if file == "file3.csv":
-                exist=True
-        self.assertEqual(True,exist)
+                exist = True
+        self.assertEqual(True, exist)
 
 
     def test_to_verify_if_exist_write_method_for_TXT(self):
@@ -78,8 +78,8 @@ class TestWriter(unittest.TestCase):
             "H1":'.', "H2":'.', "H3":'.', "H4":'6', "H5":'5', "H6":'7', "H7":'8', "H8":'.', "H9":'4',
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
-        writer=WriterTXT()
-        self.assertTrue(writer.write(sudoku,"file.txt"))
+        writer = WriterTXT()
+        self.assertTrue(writer.write(sudoku, "file.txt"))
     def test_to_verify_if_exist_write_method_for_CSV(self):
         sudoku = {
             "A1":'.', "A2":'6', "A3":'7', "A4":'6', "A5":'4', "A6":'.', "A7":'.', "A8":'.', "A9":'2',
@@ -92,10 +92,8 @@ class TestWriter(unittest.TestCase):
             "H1":'.', "H2":'.', "H3":'.', "H4":'6', "H5":'5', "H6":'7', "H7":'8', "H8":'.', "H9":'4',
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
-        writer=WriterCSV()
-        self.assertTrue(writer.write(sudoku, "filec.csv"))
-
-
+        writer = WriterCSV()
+        self.assertTrue(writer.write(sudoku, "filec.csv"))        
 
 if __name__ == '__main__':
 

@@ -11,8 +11,7 @@
 from abc import abstractmethod
 
 class Writer(object):
-    def __init__(self):
-        pass
+
     @abstractmethod
     def write(self,sudoku,filename_user):
         """
