@@ -28,10 +28,11 @@ class WriterCSV(Writer):
             for column in self.column_labels:
                 string_representation += '0' if grid[row + column] == '.' else grid[row + column]
         return string_representation
+    
     def write(self,sudoku,filename_user):
         if os.path.isfile(filename_user):
             #file exists then rename it
-            new_file = open(self.createNewFilename(), 'w')
+            new_file = open(self.createNewFilename(filename_user), 'w')
         else:
             #file does not exist, lets create it
             new_file = open(filename_user, 'w')
@@ -50,7 +51,7 @@ class WriterCSV(Writer):
         new_file.close()
         return True
 
-    def createNewFilename(self):
+    def createNewFilename(self, filename_user):
         now = datetime.datetime.now()
         now=now.replace(microsecond=0)
         now=now.strftime("%B %d, %Y")
@@ -61,7 +62,9 @@ class WriterCSV(Writer):
         for c in string.punctuation:
             stringname= stringname.replace(c,"")
         stringname=stringname+".csv"
-        return stringname
+        path = os.path.dirname(filename_user)
+        
+        return path + "\\" + stringname
 
 
     

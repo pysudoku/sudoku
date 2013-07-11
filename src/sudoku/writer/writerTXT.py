@@ -36,7 +36,8 @@ class WriterTXT(Writer):
         
         if os.path.isfile(filename_user):
             #file exists then rename it
-            new_file = open(self.createNewFilename(), 'w')
+            new_file = open(self.createNewFilename(filename_user), 'w')
+            
         else:
             #file does not exist, lets create it
             new_file = open(filename_user, 'w')
@@ -64,7 +65,7 @@ class WriterTXT(Writer):
         new_file.close()
         return True
 
-    def createNewFilename(self):
+    def createNewFilename(self, filename_user):
         now = datetime.datetime.now()
         now=now.replace(microsecond=0)
         now=now.strftime("%B %d, %Y")
@@ -75,6 +76,9 @@ class WriterTXT(Writer):
         for c in string.punctuation:
             stringname= stringname.replace(c,"")
         stringname=stringname+".txt"
-        return stringname
+        
+        path = os.path.dirname(filename_user)
+        
+        return path + "\\" + stringname
 
 
