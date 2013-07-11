@@ -34,22 +34,34 @@ class Settings(object):
     def getOutputType(self):
         return self.outputType
     
-    def getalgorithmName(self):
+    def getAlgorithmName(self):
         return self.algorithmName
     
     def getPath(self):
         return self.path
     
-    def getdefaultLevel(self):
+    def getDefaultLevel(self):
         return self.defaultLevel
     
-    def getlevels(self):
+    def getLevels(self):
         return self.levels
     
-    def addlevel(self, level):
+    def addLevel(self, level):
         self.levels.append(level)
         
-    def getlevel(self, name):
+    def getLevel(self, name):
         for level in self.levels:
-            if level.name == name:
+            if level.levelName == name:
                 return level
+            
+    def setOutputType(self, outputType):
+        self.outputType = outputType
+        
+    def setAlgorithmName(self, algorithmName):
+        self.algorithmName = algorithmName
+        
+    def setDefaultLevel(self, defaultLevel):
+        self.defaultLevel = defaultLevel
+        
+    def setPath(self, path):
+        self.path = path

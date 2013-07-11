@@ -19,7 +19,6 @@ class SettingsReader(object):
         '''
         Constructor
         '''
-        pass
     
     def read(self, fileName):
         settings = Settings(fileName)

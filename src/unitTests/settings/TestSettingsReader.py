@@ -76,21 +76,21 @@ class TestSettingsReader(unittest.TestCase):
     def test_Given_a_valid_xml_file_then_read_default_algorithm_properly(self):
         reader = SettingsReader()
         settings = reader.read(self.fileName)
-        algorithmName = settings.getalgorithmName()
+        algorithmName = settings.getAlgorithmName()
         expectedAlgorithmName = self.algorithmName
         self.assertEqual(expectedAlgorithmName, algorithmName)
     
     def test_Given_a_valid_xml_file_then_read_default_level_properly(self):
         reader = SettingsReader()
         settings = reader.read(self.fileName)
-        defaultLevel = settings.getdefaultLevel()
+        defaultLevel = settings.getDefaultLevel()
         expectedDefaultLevel = self.defaultLevel
         self.assertEqual(expectedDefaultLevel, defaultLevel)    
     
     def test_Given_a_valid_xml_file_then_read_dificult_levels_properly(self):
         reader = SettingsReader()
         settings = reader.read(self.fileName)
-        levels = settings.getlevels()
+        levels = settings.getLevels()
         expectedlevels = self.levels
         self.assertListEqual(expectedlevels, levels)
      
@@ -104,21 +104,21 @@ class TestSettingsReader(unittest.TestCase):
     def test_Given_an_xmlconfig_without_AlgorithmName_Value_then_the_default_value_should_be_used(self):
         reader = SettingsReader()
         settings = reader.read(self.invaliFileName)
-        algorithmName = settings.getalgorithmName()
+        algorithmName = settings.getAlgorithmName()
         expectedalgorithmName = settings.DEFAULT_ALGORITHM_NAME
         self.assertEqual(expectedalgorithmName, algorithmName)
         
     def test_Given_an_xmlconfig_without_DefaultLevel_Value_then_the_default_value_should_be_used(self):
         reader = SettingsReader()
         settings = reader.read(self.invaliFileName)
-        defaultLevel = settings.getdefaultLevel()
+        defaultLevel = settings.getDefaultLevel()
         expectedDefaultLevel = settings.DEFAULT_LEVEL_NAME
         self.assertEqual(expectedDefaultLevel, defaultLevel)
         
     def test_Given_an_xmlconfig_without_levels_then_a_default_level_should_be_created(self):
         reader = SettingsReader()
         settings = reader.read(self.invaliFileName)
-        levels = settings.getlevels()
+        levels = settings.getLevels()
         
         expectedSize = 1
         expectedLevelName = Level(settings.DEFAULT_LEVEL_NAME, settings.DEFAULT_MIN, settings.DEFAULT_MAX)
