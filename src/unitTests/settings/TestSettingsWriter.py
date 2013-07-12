@@ -91,6 +91,18 @@ class TestSettingsWriter(unittest.TestCase):
         self.maxDiff = None
         self.assertEqual(excpectedValue, actualValue)
     
+    def test_given_the_levels_parameter_then_should_be_added_the_levels_parameter_in_the_file_when_it_is_saved(self):
+        level = Level("Level 4", 7, 40)
+        
+        self.settings.addLevel(level)
+        writer = SettingsWriter()
+        writer.write(self.settings, self.fileName)
+        
+        actualValue = self.readFile(self.fileName)
+        excpectedValue = "<data><outputtype>file</outputtype><algorithmname>Peter Norving</algorithmname><defaultlevel>Level 2</defaultlevel><path>c:\\test</path><levels><level maxLevel=\"10\" minLevel=\"5\" name=\"Level 1\" /><level maxLevel=\"20\" minLevel=\"11\" name=\"Level 2\" /><level maxLevel=\"30\" minLevel=\"21\" name=\"Level 3\" /><level maxLevel=\"40\" minLevel=\"7\" name=\"Level 4\" /></levels></data>"
+
+        self.maxDiff = None
+        self.assertEqual(excpectedValue, actualValue)
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
