@@ -4,6 +4,8 @@ Created on Jul 5, 2013
 @author: Jimena Terceros
 '''
 import unittest
+import os
+
 from sudoku.settings.exceptions.InvalidXMLSettingsException import InvalidXMLSettingsException
 from sudoku.settings.exceptions.FileNotFoundException import FileNotFoundException
 from sudoku.settings.SettingsReader import SettingsReader
@@ -19,7 +21,9 @@ class TestSettingsReader(unittest.TestCase):
         self.createCorruptedXMlConfigFile()
     
     def tearDown(self):
-        pass
+        os.remove(self.fileName)
+        os.remove(self.invaliFileName)
+        os.remove(self.corruptedFileName)
         
     def createCorruptedXMlConfigFile(self):
         self.corruptedFileName = "corruptedSettings.xml"
