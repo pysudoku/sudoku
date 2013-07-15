@@ -47,12 +47,12 @@ class TestSettingsReader(unittest.TestCase):
         self.algorithmName = "Peter Norving"
         self.defaultLevel = "Level 2"
         self.levels = [Level("Level 1", 5, 10), Level("Level 2", 11, 20), Level("Level 3", 21, 30)]
-        self.path = "c:\test"
+        self.path = "c:\\test"
         
         file = open(self.fileName, "w")
         file.write("<data>\n")
         file.write("<outputtype>file</outputtype>\n")
-        file.write("<path>c:\test</path>\n")
+        file.write("<path>c:\\test</path>\n")
         file.write("<algorithmname>Peter Norving</algorithmname>\n")
         file.write("<defaultlevel>Level 2</defaultlevel>\n")
         file.write("<levels>\n")

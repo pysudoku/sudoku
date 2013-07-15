@@ -19,7 +19,9 @@ class TestSettings(unittest.TestCase):
         self.settings.addLevel(self.level1)
         self.settings.addLevel(self.level2)
         self.settings.addLevel(self.level3)
-
+        
+        self.defaultLevel = Level(self.settings.DEFAULT_LEVEL_NAME, self.settings.DEFAULT_MIN, self.settings.DEFAULT_MAX)
+        
     def tearDown(self):
         pass
     
@@ -39,7 +41,7 @@ class TestSettings(unittest.TestCase):
         self.assertEqual(settings.DEFAULT_ALGORITHM_NAME, settings.getAlgorithmName())
         self.assertEqual(settings.DEFAULT_LEVEL_NAME, settings.getDefaultLevel())
         self.assertEqual(1, len(settings.getLevels()))
-        self.assertEqual(settings.DEFAULT_LEVEL_NAME, settings.getLevels()[0])
+        self.assertEqual(self.defaultLevel, settings.getLevels()[0])
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

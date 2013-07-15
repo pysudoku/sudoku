@@ -3,6 +3,7 @@ Created on Jul 6, 2013
 
 @author: Jimena Terceros
 '''
+from sudoku.settings.Level import Level
 class Settings(object):
     '''
     classdocs
@@ -29,7 +30,7 @@ class Settings(object):
         self.outputType = self.DEFAULT_OUTPUT_TYPE
         self.algorithmName = self.DEFAULT_ALGORITHM_NAME
         self.defaultLevel = self.DEFAULT_LEVEL_NAME
-        self.levels.append(self.DEFAULT_LEVEL_NAME)
+        self.levels.append(Level(self.DEFAULT_LEVEL_NAME, self.DEFAULT_MIN, self.DEFAULT_MAX))
 
     def getOutputType(self):
         return self.outputType
