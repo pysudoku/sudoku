@@ -4,7 +4,7 @@ Created on Jul 15, 2013
 @author: Jimena Terceros
 '''
 
-class Invalid_column_exception(Exception):
+class InvalidColumnException(Exception):
     '''
     classdocs
     '''

@@ -4,7 +4,7 @@ Created on Jun 29, 2013
 @author: Jimena Terceros
 '''
 import unittest
-from sudoku.model.cell import cell
+from sudoku.model.cell import Cell
 from sudoku.model.exception.CellNotEditableException import CellNotEditableException
 
 class TestCell(unittest.TestCase):
@@ -13,17 +13,17 @@ class TestCell(unittest.TestCase):
     def setUp(self):
         self.validValue = 2
         self.invalidValue = 51
-        self.defaultCell = cell()
-        self.validCell = cell(self.validValue, False)
-        self.validCellEdit = cell(self.validValue, True)
+        self.defaultCell = Cell()
+        self.validCell = Cell(self.validValue, False)
+        self.validCellEdit = Cell(self.validValue, True)
 
     def testIfThereIsNotParametersInTheCellThenshouldSetDefaultParametersTotheCell(self):
         self.assertEqual(0, self.defaultCell.value)
-        self.assertEqual(True, self.defaultCell.edit)
+        self.assertEqual(True, self.defaultCell.editable)
 
     def testIfTheCellHasParametersThenshouldSetTheValuesProperly(self):
         self.assertEqual(self.validValue, self.validCell.value)
-        self.assertEqual(False, self.validCell.edit)
+        self.assertEqual(False, self.validCell.editable)
     
     def testIfTryToSetValueWithAValidParameterWhenTheCellIsEditableThenShouldSetTheValueProperly(self):
         self.validCellEdit.set_value(self.validValue)
@@ -41,10 +41,10 @@ class TestCell(unittest.TestCase):
         self.assertEqual(self.validValue, value)
     
     def testifCellIsEditableThenIsEditshouldReturnTrue(self):
-        self.assertTrue(self.validCellEdit.isEdit())
+        self.assertTrue(self.validCellEdit.is_editable())
     
     def testifCellIsNotEditableThenIsEditshouldReturnFalse(self):
-        self.assertFalse(self.validCell.isEdit())
+        self.assertFalse(self.validCell.is_editable())
 
 
 if __name__ == "__main__":

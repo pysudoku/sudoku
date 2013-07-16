@@ -4,7 +4,7 @@ Created on Jul 15, 2013
 @author: Jimena Terceros
 '''
 
-class Invalid_row_exception(Exception):
+class InvalidRowException(Exception):
     '''
     classdocs
     '''

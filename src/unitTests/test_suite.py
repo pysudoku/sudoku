@@ -24,7 +24,7 @@ from unitTests.reader.test_csvparser import TestCSVParser
 from unitTests.reader.test_commandlineparser import TestCommandLineParser
 from unitTests.settings.TestSettingsManager import TestSettingsManager
 from unitTests.model.UniTestcell import TestCell
-from unitTests.model.UniTestSudokutable import TestSudokuTable
+from unitTests.model.UniTestSudokutable import TestSudokuBoard
 
 def main():
     suite = unittest.TestSuite()
@@ -43,7 +43,7 @@ def main():
     suite.addTest(unittest.makeSuite(TestCommandLineParser))
     suite.addTest(unittest.makeSuite(TestSettingsManager))
     suite.addTest(unittest.makeSuite(TestCell))
-    suite.addTest(unittest.makeSuite(TestSudokuTable))
+    suite.addTest(unittest.makeSuite(TestSudokuBoard))
 
     unittest.TextTestRunner(verbosity = 2).run(suite)
     

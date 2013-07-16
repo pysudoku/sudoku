@@ -4,7 +4,7 @@ Created on Jul 15, 2013
 @author: Jimena Terceros
 '''
 
-class Invalid_dictionary_size_exception(Exception):
+class InvalidDictionarySizeException(Exception):
     '''
     classdocs
     '''

@@ -3,13 +3,13 @@ Created on Jun 30, 2013
 
 @author: Jimena Terceros
 '''
-from sudoku.model.cell import cell
-from sudoku.model.exception.Invalid_row_exception import Invalid_row_exception
-from sudoku.model.exception.Invalid_column_exception import Invalid_column_exception
+from sudoku.model.cell import Cell
+from sudoku.model.exception.Invalid_row_exception import InvalidRowException
+from sudoku.model.exception.Invalid_column_exception import InvalidColumnException
 from sudoku.model.exception.InvalidParameterValueException import InvalidParameterValueException
-from sudoku.model.exception.Invalid_dictionary_size_exception import Invalid_dictionary_size_exception
+from sudoku.model.exception.Invalid_dictionary_size_exception import InvalidDictionarySizeException
 
-class Sudoku_Table:
+class SudokuBoard:
     """
     Creating this class, we are creating sudoku table that has the following parameters
     """
@@ -25,21 +25,19 @@ class Sudoku_Table:
         
     def initialize(self):
         '''
-        Creating sudoku table
-        @param maxsize: the value for maxsize attribute
-        @param cols: the value for columns attribute
-        @param rows: the value for rows attribute
+        Initialize values of columns, rows and valid values for Sudoku table
+        according the Sudoku'size
         '''
-        maxsize = (self.size + 1)
-        self.cols = range(1, maxsize)
+        max_size = (self.size + 1)
+        self.cols = range(1, max_size)
         self.rows = []
-        self.validValues = range(0, maxsize)
+        self.valid_values = range(0, max_size)
         for r in range(0, self.size):
             self.rows.append(chr(65 + r))
             
         for r in self.rows:
             for c in self.cols:
-                self.dic[r+str(c)] = cell(0, True)
+                self.dic[r+str(c)] = Cell(0, True)
                 
     def set_value(self, row, col, value):
         '''
@@ -50,7 +48,7 @@ class Sudoku_Table:
         @raise InvalidParameterValueException: when you try to set an invalid value
         '''
         self.validate_cell(row, col)
-        if not value in self.validValues:
+        if not value in self.valid_values:
             raise InvalidParameterValueException("value")
         
         self.dic[row + str(col)].set_value(value)
@@ -83,23 +81,23 @@ class Sudoku_Table:
         Validates the value of row and the value of column 
         @param row: the value for row attribute
         @param col: the value for column attribute
-        @raise Invalid_row_exception: when the row's value is out of the range for rows.
-        @raise Invalid_column_exception: when the column's value is out of the range for columns.
+        @raise InvalidRowException: when the row's value is out of the range for rows.
+        @raise InvalidColumnException: when the column's value is out of the range for columns.
         '''
         if not row in self.rows:
-            raise Invalid_row_exception()
+            raise InvalidRowException()
         if not col in self.cols:
-            raise Invalid_column_exception()
+            raise InvalidColumnException()
         
     def from_dictionary(self, dictionary):
         '''
-        Converts a dictionary to sudoku table where the key represents the cell's name of the table as 'A1', 'A2',.. 
-        and the value is the value that is in the cell. 
+        Converts a dictionary to sudoku table where the key represents the Cell's name of the table as 'A1', 'A2',.. 
+        and the value is the value that is in the Cell. 
         @param dictionary: the value for dictionary attribute 
-        @raise Invalid_dictionary_size_exception: when try convert an invalid dictionary to sudoku table 
+        @raise InvalidDictionarySizeException: when try convert an invalid dictionary to sudoku table 
         '''
         if len(self.dic) != len(dictionary):
-            raise Invalid_dictionary_size_exception()
+            raise InvalidDictionarySizeException()
         
         for row in self.rows:
             for col in self.cols:
@@ -107,8 +105,8 @@ class Sudoku_Table:
                 
     def to_dictionary(self):
         '''
-        Converts sudoku table to a dictionary with keys that represents the cell's name
-        of the table as 'A1', 'A2', ..., and the value is the value that is in the cell.
+        Converts sudoku table to a dictionary with keys that represents the Cell's name
+        of the table as 'A1', 'A2', ..., and the value is the value that is in the Cell.
         '''
         dictionary = {}
         

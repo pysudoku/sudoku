@@ -5,27 +5,27 @@ Created on Jun 29, 2013
 '''
 from sudoku.model.exception.CellNotEditableException import CellNotEditableException
 
-class cell:
+class Cell:
     '''
-    Creating this class, we are creating cell of the sudoku table that has the following parameters 
+    Creating this class, we are creating Cell of the sudoku table that has the following parameters 
     '''
 
-    def __init__(self, val = 0, edit = True):
+    def __init__(self, val = 0, editable = True):
         '''
         Constructor.
-        @param val: parameter means the value of the cell it can go from 0 to 9 in a sudoku of 9 x 9
-        @param edit: parameter means that the cell is editable by default 
+        @param val: parameter means the value of the Cell it can go from 0 to 9 in a sudoku of 9 x 9
+        @param editable: parameter means that the Cell is editable by default 
         '''
         self.value = val
-        self.edit = edit
+        self.editable = editable
         
     def set_value(self, value):
         '''
         Sets the value attribute.
         @param value: the value for value attribute.
-        @raise CellNotEditableException: when try to set value in a non editable cell. 
+        @raise CellNotEditableException: when try to set value in a non editable Cell. 
         '''
-        if not self.isEdit():
+        if not self.is_editable():
             raise CellNotEditableException()
         self.value = value
             
@@ -36,16 +36,16 @@ class cell:
         '''
         return self.value
     
-    def isEdit(self):
+    def is_editable(self):
         '''
-        Verify if the edit attribute is editable
-        @param edit: the value for edit attribute
+        Gets the value for editable attribute.
+        @param editable: the value for editable attribute
         '''
-        return self.edit
+        return self.editable
     
     def set_editable(self, editable):
         '''
         Sets the value of the editable attribute
         @param editable: the value for editable attribute 
         '''
-        self.edit = editable
+        self.editable = editable
