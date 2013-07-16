@@ -11,6 +11,10 @@
 */__pycache__/*
 *htmlcov*
 
+#EclipseProjectFiles
+.project
+.pydevproject
+
 #binaries
 .coverage
 
