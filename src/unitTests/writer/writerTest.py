@@ -93,7 +93,17 @@ class TestWriter(unittest.TestCase):
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
         writer = WriterCSV()
-        self.assertTrue(writer.write(sudoku, "filec.csv"))        
+        self.assertTrue(writer.write(sudoku, "filec.csv"))
+         
+    def tearDown(self):
+        if os.path.isfile("file2.txt"):
+            os.remove("file2.txt")
+        if os.path.isfile("file.txt"):
+            os.remove("file.txt")
+        if os.path.isfile("file3.csv"):
+            os.remove("file3.csv")
+        if os.path.isfile("filec.csv"):
+            os.remove("filec.csv")       
 
 if __name__ == '__main__':
 

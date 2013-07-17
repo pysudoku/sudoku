@@ -8,6 +8,8 @@ sys.path.append("../../src")
 from sudoku.algorithm.AlgorithmFactory import AlgorithmFactory
 from sudoku.algorithm.AlgorithmType import AlgorithmType
 
+
+
 if __name__ == '__main__':
     """
     this grid is to verify valid solution of the algorithm
@@ -63,11 +65,22 @@ if __name__ == '__main__':
     alg = factory.getAlgorithm()
     solution = alg.solve(grid)
     print(solution)
+
+
+
+
+
     
     factory = AlgorithmFactory(AlgorithmType.BACK_TRACKING)
     alg = factory.getAlgorithm()
     solution = alg.solve(grid)
     print(solution)
+    
+    factory = AlgorithmFactory(AlgorithmType.RECURSIVE)
+    alg = factory.getAlgorithm()
+    solution = alg.solve(grid)
+    print(solution)
+    
     
     factory = AlgorithmFactory(AlgorithmType.RECURSIVE)
     alg = factory.getAlgorithm()
