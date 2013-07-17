@@ -76,6 +76,11 @@ class SudokuBoard:
         
         self.dic[row + str(col)].set_editable(editable)
         
+    def is_editable(self, row, col):
+        self.validate_cell(row, col)
+        
+        return self.dic[row + str(col)].is_editable()
+        
     def validate_cell(self, row, col):
         '''
         Validates the value of row and the value of column 
@@ -89,7 +94,7 @@ class SudokuBoard:
         if not col in self.cols:
             raise InvalidColumnException()
         
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary, make_editable = True):
         '''
         Converts a dictionary to sudoku table where the key represents the Cell's name of the table as 'A1', 'A2',.. 
         and the value is the value that is in the Cell. 
@@ -102,6 +107,7 @@ class SudokuBoard:
         for row in self.rows:
             for col in self.cols:
                 self.set_value(row, col, dictionary[row + str(col)])
+            self.set_editable(row, col, make_editable)
                 
     def to_dictionary(self):
         '''
