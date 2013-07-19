@@ -40,7 +40,7 @@ class TestSettings(unittest.TestCase):
         self.assertEqual(settings.DEFAULT_OUTPUT_TYPE, settings.getOutputType())
         self.assertEqual(settings.DEFAULT_ALGORITHM_NAME, settings.getAlgorithmName())
         self.assertEqual(settings.DEFAULT_LEVEL_NAME, settings.getDefaultLevel())
-        self.assertEqual(1, len(settings.getLevels()))
+        self.assertEqual(3, len(settings.getLevels()))
         self.assertEqual(self.defaultLevel, settings.getLevels()[0])
 
 if __name__ == "__main__":

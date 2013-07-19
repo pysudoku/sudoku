@@ -30,6 +30,11 @@ class TestLevel(unittest.TestCase):
         level2 = Level(self.levelName, self.minLevel, self.maxLevel)
         self.assertFalse(level1 == level2)
 
+    def test_level_eq_int_should_return_false(self):
+        level1 = Level("otherLevel", self.minLevel, self.maxLevel)
+        level2 = 2
+        self.assertFalse(level1 == level2)
+
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
