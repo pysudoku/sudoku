@@ -21,15 +21,15 @@ class TestHintCommand(unittest.TestCase):
         self.none_column_params = {"row": 'B', "column": None}
         
         self.cell = "B3"
-        self.solved_sudoku = self.dic_with_data = {"A1":1, "A2":3, "A3":2, 
-                                                   "B1":2, "B2":1, "B3":3, 
-                                                   "C1":3, "C2":2, "C3":1}
-        self.sudoku = self.dic_with_data =      {"A1":0, "A2":0, "A3":2, 
-                                                 "B1":2, "B2":0, "B3":0, 
-                                                 "C1":0, "C2":2, "C3":0}
-        self.user_sudoku = self.dic_with_data = {"A1":1, "A2":3, "A3":2, 
-                                                 "B1":2, "B2":1, "B3":0, 
-                                                 "C1":0, "C2":2, "C3":0}
+        self.solved_sudoku = self.dic_with_data = {"A1":'1', "A2":'3', "A3":'2', 
+                                                   "B1":'2', "B2":'1', "B3":'3', 
+                                                   "C1":'3', "C2":'2', "C3":'1'}
+        self.sudoku = self.dic_with_data =      {"A1":'0', "A2":'0', "A3":'2', 
+                                                 "B1":'2', "B2":'0', "B3":'0', 
+                                                 "C1":'0', "C2":'2', "C3":'0'}
+        self.user_sudoku = self.dic_with_data = {"A1":'1', "A2":'3', "A3":'2', 
+                                                 "B1":'2', "B2":'1', "B3":'0', 
+                                                 "C1":'0', "C2":'2', "C3":'0'}
 
     
     def test_given_a_none_parameter_then_should_raise_an_exception(self):

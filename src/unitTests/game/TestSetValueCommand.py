@@ -13,7 +13,7 @@ from sudoku.game.SetValueCommand import SetValueCommand
 class TestSetValueCommand(unittest.TestCase):
 
     def setUp(self):
-        self.valid_value = 5
+        self.valid_value = '5'
         self.cell = "B3"
         self.clear_params = {}
         self.hint_parameters = {"row": 'B', "column": 3, "value": self.valid_value}
