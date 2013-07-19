@@ -14,10 +14,10 @@ from sudoku.model.exception.Invalid_dictionary_size_exception import InvalidDict
 class TestSudokuBoard(unittest.TestCase):
 
     def setUp(self):
-        self.onedata = {"A1":6}
-        self.dic_with_data = {"A1":1, "A2":3, "A3":1, "B1":0, "B2":2, "B3":0, "C1":2, "C2":1, "C3":3}
-        self.emptydic = {"A1":0, "A2":0, "A3":0, "B1":0, "B2":0, "B3":0, "C1":0, "C2":0, "C3":0}
-        self.dic_with_invalid_values = {"A1":0, "A2":5, "A3":6, "B1":0, "B2":9, "B3":1, "C1":0, "C2":9, "C3":8}
+        self.onedata = {"A1":"6"}
+        self.dic_with_data = {"A1":"1", "A2":"3", "A3":"1", "B1":"0", "B2":"2", "B3":"0", "C1":"2", "C2":"1", "C3":"3"}
+        self.emptydic = {"A1":"0", "A2":"0", "A3":"0", "B1":"0", "B2":"0", "B3":"0", "C1":"0", "C2":"0", "C3":"0"}
+        self.dic_with_invalid_values = {"A1":"0", "A2":"5", "A3":"6", "B1":"0", "B2":"9", "B3":"1", "C1":"0", "C2":"9", "C3":"8"}
 
     def ifASukokuTableIsCreatedThenTheDictionaryStructureShouldHaveTheRightSizeOfRecordsWithDefaultInformation(self):
         sudoku = SudokuBoard(3)
@@ -33,7 +33,7 @@ class TestSudokuBoard(unittest.TestCase):
                 Cell = sudoku.getCell(row, col)
                 value = Cell.get_value()
                 editable = Cell.iseditable()
-                self.assertEqual(0, value)
+                self.assertEqual('0', value)
                 self.assertTrue(editable)
     
     def testIfTableIsCreatedByDefaultThenShouldHaveSize9AndShouldHave81Cells(self):
@@ -50,14 +50,14 @@ class TestSudokuBoard(unittest.TestCase):
     
     def testIfTryToAddDataInRightCellThenShouldAddTheDataProperly(self):
         sudoku = SudokuBoard(18)
-        sudoku.set_value('B', 2, 5)
+        sudoku.set_value('B', 2, '5')
         
-        self.assertEqual(5, sudoku.dic['B2'].get_value())
+        self.assertEqual('5', sudoku.dic['B2'].get_value())
     
     def testIfTryToUpdateDataInAnInvalidRowThenShouldTrowAnException(self):
         sudoku = SudokuBoard()
         try:
-            sudoku.set_value('J', 2, 5)
+            sudoku.set_value('J', 2, '5')
             self.fail("Did not raise the exception InvalidRowException")
         except InvalidRowException:
             pass
@@ -65,16 +65,16 @@ class TestSudokuBoard(unittest.TestCase):
     def testIfTryToUpdateDataInAnInvalidColumnThenShouldTrowAnException(self):
         sudoku = SudokuBoard()
         try:
-            sudoku.set_value('A', 10, 5)
+            sudoku.set_value('A', 10, '5')
             self.fail("Did not raise the exception InvalidColumnException")
         except InvalidColumnException:
             pass
     
     def testIfTryToFindDataInRightCellThenShouldFindTheCorrectData(self):
         sudoku = SudokuBoard(3)
-        sudoku.dic['C2'].set_value(4)
+        sudoku.dic['C2'].set_value('4')
         value = sudoku.get_value('C', 2)
-        self.assertEqual(4, value)
+        self.assertEqual('4', value)
     
     def testIfTryToFindDataFromInvalidRowThenShouldTrowAnException(self):
         sudoku = SudokuBoard(3)
@@ -94,14 +94,14 @@ class TestSudokuBoard(unittest.TestCase):
     
     def testWhenTrySetDataInCorrectAndEditableCellThenShouldSetDataProperly(self):
         sudoku = SudokuBoard(3)
-        sudoku.set_value('C', 2, 2)
-        self.assertEqual(2, sudoku.dic['C2'].get_value())
+        sudoku.set_value('C', 2, '2')
+        self.assertEqual('2', sudoku.dic['C2'].get_value())
     
     def testWhenTrySetDateInCorrectAndNonEditableCellThenShouldThrownAnException(self):
         sudoku = SudokuBoard(3)
         sudoku.set_editable('C', 2, False)
         try:
-            sudoku.set_value('C', 2, 2)
+            sudoku.set_value('C', 2, '2')
             self.fail("Did not raise the exception CellNotEditableException")
         except CellNotEditableException:
             pass
@@ -109,7 +109,7 @@ class TestSudokuBoard(unittest.TestCase):
     def testWhenTryToSetAnInvalidValueThehnShouldRaiseanException(self):
         sudoku = SudokuBoard(3)
         try:
-            sudoku.set_value('C', 2, 5)
+            sudoku.set_value('C', 2, '5')
             self.fail("Did not raise the exception InvalidParameterValueException")
         except InvalidParameterValueException:
             pass
@@ -155,6 +155,16 @@ class TestSudokuBoard(unittest.TestCase):
                 
         dictionary = sudoku.to_dictionary()
         self.assertDictEqual(self.dic_with_data, dictionary)
+        
+    def test_test(self):
+        sudoku = SudokuBoard(3)
+        sudoku.from_dictionary(self.dic_with_data, True)
+        
+        self.assertFalse(sudoku.dic['A3'].is_editable())
+        self.assertFalse(sudoku.dic['B2'].is_editable())
+        self.assertTrue(sudoku.dic['B1'].is_editable())
+        self.assertTrue(sudoku.dic['B3'].is_editable())
+        
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

@@ -18,7 +18,7 @@ class TestCell(unittest.TestCase):
         self.validCellEdit = Cell(self.validValue, True)
 
     def testIfThereIsNotParametersInTheCellThenshouldSetDefaultParametersTotheCell(self):
-        self.assertEqual(0, self.defaultCell.value)
+        self.assertEqual('0', self.defaultCell.value)
         self.assertEqual(True, self.defaultCell.editable)
 
     def testIfTheCellHasParametersThenshouldSetTheValuesProperly(self):

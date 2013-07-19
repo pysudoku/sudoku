@@ -10,7 +10,7 @@ class Cell:
     Creating this class, we are creating Cell of the sudoku table that has the following parameters 
     '''
 
-    def __init__(self, val = 0, editable = True):
+    def __init__(self, val = '0', editable = True):
         '''
         Constructor.
         @param val: parameter means the value of the Cell it can go from 0 to 9 in a sudoku of 9 x 9

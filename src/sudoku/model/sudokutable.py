@@ -31,7 +31,9 @@ class SudokuBoard:
         max_size = (self.size + 1)
         self.cols = range(1, max_size)
         self.rows = []
-        self.valid_values = range(0, max_size)
+        self.valid_values = []
+        for value in range(0, max_size):
+            self.valid_values.append(str(value)) 
         for r in range(0, self.size):
             self.rows.append(chr(65 + r))
             
@@ -94,7 +96,7 @@ class SudokuBoard:
         if not col in self.cols:
             raise InvalidColumnException()
         
-    def from_dictionary(self, dictionary, make_editable = True):
+    def from_dictionary(self, dictionary, change_editable = False):
         '''
         Converts a dictionary to sudoku table where the key represents the Cell's name of the table as 'A1', 'A2',.. 
         and the value is the value that is in the Cell. 
@@ -106,8 +108,12 @@ class SudokuBoard:
         
         for row in self.rows:
             for col in self.cols:
-                self.set_value(row, col, dictionary[row + str(col)])
-            self.set_editable(row, col, make_editable)
+                value = dictionary[row + str(col)]
+                self.set_value(row, col, value)
+                if  change_editable and value != '0' and value != '.': 
+                    self.set_editable(row, col, False)
+                else:
+                    self.set_editable(row, col, True)
                 
     def to_dictionary(self):
         '''
