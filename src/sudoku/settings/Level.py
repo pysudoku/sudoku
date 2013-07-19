@@ -19,7 +19,9 @@ class Level(object):
         self.maxLevel = maxLevel
         
     def __eq__(self, otherLevel):
-        if self.levelName == otherLevel.levelName and self.minLevel == otherLevel.minLevel and self.maxLevel == otherLevel.maxLevel:
+        if not isinstance(otherLevel, Level):
+            return False
+        elif self.levelName == otherLevel.levelName and self.minLevel == otherLevel.minLevel and self.maxLevel == otherLevel.maxLevel:
             return True
         else:
             return False

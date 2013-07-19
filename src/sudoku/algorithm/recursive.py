@@ -13,6 +13,14 @@ class Recursive(Algorithm):
     column_labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     row_labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I']
 
+    def __init__(self):
+        self._cell_siblings_indexes = [[cell for cell in range(len(self.puzzle_symbols)**2) if self._is_sibling(cell_to_fill,cell)] for cell_to_fill in range(len(self.puzzle_symbols)**2)]
+    
+    def _is_sibling(self, index, other_index):
+        return self.same_row(index, other_index) or \
+               self.same_col(index, other_index) or \
+               self.same_block(index, other_index)
+
     def same_row(self, index, other_index):
         '''Returns true if both indexes are in the same row of a 9 x 9 sudoku puzzle.'''
         return (index // 9 == other_index // 9)
@@ -25,6 +33,11 @@ class Recursive(Algorithm):
         '''Returns true if both indexes are in the same 3 x 3 block of a 9 x 9 sudoku puzzle.'''
         return (index // 27 == other_index // 27 and index % 9 // 3 == other_index % 9 // 3)
 
+    def _get_available_symbols(self, puzzle, cell):
+        '''Returns a list of symbols that can be used to fill a cell'''
+        already_used_symbols = set([puzzle[index] for index in self._cell_siblings_indexes[cell]])
+        return list(set(self.puzzle_symbols) - already_used_symbols)
+
     def solve_puzzle(self, puzzle, solutions):
         '''Recursively calculates solutions for a sudoku puzzle.'''
 
@@ -32,14 +45,8 @@ class Recursive(Algorithm):
         if cell_to_fill == -1:
             solutions.append(puzzle)
 
-        already_used_symbols = set()
-        for cell in range(81):
-            if self.same_row(cell_to_fill,cell) or self.same_col(cell_to_fill,cell) or self.same_block(cell_to_fill,cell):
-                already_used_symbols.add(puzzle[cell])
-
-        for symbol in self.puzzle_symbols:
-            if symbol not in already_used_symbols:
-                self.solve_puzzle(puzzle[:cell_to_fill] + symbol + puzzle[cell_to_fill + 1:], solutions)
+        for symbol in self._get_available_symbols(puzzle, cell_to_fill):
+            self.solve_puzzle(puzzle[:cell_to_fill] + symbol + puzzle[cell_to_fill + 1:], solutions)
 
     def is_valid_solution(self, candidate_solution):
         '''Returns True if a candidate solution is a valid solution.'''
@@ -76,13 +83,16 @@ class Recursive(Algorithm):
                 index += 1
         return dictionary_representation
 
-    def solve(self, grid_as_dict):
+    def find_all_solutions(self, grid_as_dict):
         '''Returns a list of solutions for the given Sudoku puzzle.'''
         grid_as_str = self.dict_to_str(grid_as_dict)
         candidate_solutions = []
         self.solve_puzzle(grid_as_str, candidate_solutions)
-        solutions = [self.str_to_dict(solution) for solution in candidate_solutions if self.is_valid_solution(solution)]
-        
-        if len(solutions) == 0: raise InvalidSudokuException()
-        
+        return [self.str_to_dict(solution) for solution in candidate_solutions if self.is_valid_solution(solution)]
+    
+    def solve(self, grid_as_dict):
+        '''Returns a list of solutions for the given Sudoku puzzle.'''
+        solutions = self.find_all_solutions(grid_as_dict)
+        if len(solutions) == 0: 
+            raise InvalidSudokuException()
         return solutions[0]

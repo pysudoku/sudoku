@@ -87,6 +87,7 @@ class Test_Recursive(unittest.TestCase):
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
         
+        self.invalid_solution = '967845132928736451435219786649382175751964328283571649574198263392657814816423597'
         self.recursive_solver = Recursive()
 
     def test_recursive_algorithm_should_solve_an_easy_level_sudoku_puzzle(self):
@@ -112,6 +113,10 @@ class Test_Recursive(unittest.TestCase):
         actual_results = self.recursive_solver.solve(self.hard_level_puzzle_solution)
         expected_result = self.hard_level_puzzle_solution
         self.assertEqual(expected_result, actual_results)
+
+    def test_is_valid_solution_should_return_false_if_solution_is_invalid(self):
+        self.assertFalse(self.recursive_solver.is_valid_solution(self.invalid_solution))
+
 
 if __name__ == '__main__':
     unittest.main()

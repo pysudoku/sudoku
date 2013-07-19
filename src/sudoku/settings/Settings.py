@@ -11,9 +11,9 @@ class Settings(object):
     
     DEFAULT_OUTPUT_TYPE = "Console"
     DEFAULT_ALGORITHM_NAME = "Peter Norvic"
-    DEFAULT_LEVEL_NAME = "Level 1"
-    DEFAULT_MIN = 15
-    DEFAULT_MAX = 20
+    DEFAULT_LEVEL_NAME = "EASY"
+    DEFAULT_MIN = 36
+    DEFAULT_MAX = 49
 
     def __init__(self, fileName):
         '''
@@ -31,10 +31,12 @@ class Settings(object):
         self.algorithmName = self.DEFAULT_ALGORITHM_NAME
         self.defaultLevel = self.DEFAULT_LEVEL_NAME
         self.levels.append(Level(self.DEFAULT_LEVEL_NAME, self.DEFAULT_MIN, self.DEFAULT_MAX))
+        self.levels.append(Level('MODERATE', 32, 35))
+        self.levels.append(Level('HARD', 28, 31))
 
     def getOutputType(self):
         return self.outputType
-    
+        
     def getAlgorithmName(self):
         return self.algorithmName
     

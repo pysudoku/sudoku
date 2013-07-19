@@ -5,7 +5,6 @@ Created on Jul 17, 2013
 '''
 from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
-from sudoku.game.Game import Game
 
 class HintCommand(SudokuCommand):
     '''
