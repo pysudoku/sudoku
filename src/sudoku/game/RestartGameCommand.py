@@ -5,6 +5,7 @@ Created on Jul 17, 2013
 '''
 from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
+from sudoku.model.sudokutable import SudokuBoard
 
 class RestartGameCommand(SudokuCommand):
     '''
@@ -28,7 +29,8 @@ class RestartGameCommand(SudokuCommand):
         elif self.game.initial_sudoku == None:
             raise InvalidCmdParametersException("The Sudoku was not loaded.")
         
-        self.game.user_sudoku.from_dictionary(self.game.initial_sudoku.to_dictionary())
+        self.game.user_sudoku=SudokuBoard()  
+        self.game.user_sudoku.from_dictionary(self.game.initial_sudoku.to_dictionary(),True)
         
     def validate(self):
         '''

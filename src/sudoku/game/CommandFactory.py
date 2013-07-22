@@ -8,6 +8,9 @@ from sudoku.game.RestartGameCommand import RestartGameCommand
 from sudoku.game.ReadConfigurationCommand import ReadConfigurationCommand
 from sudoku.game.HintCommand import HintCommand
 from sudoku.game.SetValueCommand import SetValueCommand
+from sudoku.game.PrintCommand import PrintBoardCommand
+from sudoku.game.Quit import QuitCommand
+from sudoku.game.GenerateGame import GenerateGameCommand
 
 class CommandFactory(object):
     '''
@@ -18,6 +21,9 @@ class CommandFactory(object):
     READ_CONFIGURATION_COMMAND = "readConfiguration"
     HINT_COMMAND = "hint"
     SET_VALUE_COMMAND = "setValue"
+    PRINT_COMMAND = "print"
+    QUIT_COMMAND = "quit"
+    GENERATE_COMMAND = "generate"
 
     def __init__(self, game):
         '''
@@ -40,6 +46,12 @@ class CommandFactory(object):
             cmd = HintCommand(params)
         elif self.SET_VALUE_COMMAND == cmdName:
             cmd = SetValueCommand(params)
+        elif self.PRINT_COMMAND == cmdName:
+            cmd = PrintBoardCommand(params)
+        elif self.QUIT_COMMAND == cmdName:
+            cmd = QuitCommand(params)
+        elif self.GENERATE_COMMAND == cmdName:
+            cmd = GenerateGameCommand(params)
         
         cmd.set_game(self.game)
         return cmd

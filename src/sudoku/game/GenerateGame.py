@@ -13,7 +13,7 @@ class GenerateGameCommand(SudokuCommand):
     '''
     LEVEL_NAME_PARAM = "level"
 
-    def __init__(self, params):
+    def __init__(self, params=None):
         '''
         Constructor
         '''
@@ -27,6 +27,7 @@ class GenerateGameCommand(SudokuCommand):
         Generates a Sudoku puzzle and sets up the SudokuBoard structure so a user can play.
         If game level is None, the game is generated using the default level specified in the Settings object.
         '''
+        
         if self.game == None:
             raise InvalidCmdParametersException("The command needs a game.")
         if not (isinstance(self.readconfig_parameters[self.LEVEL_NAME_PARAM], str)):
@@ -38,9 +39,9 @@ class GenerateGameCommand(SudokuCommand):
 
         puzzle = self.game.game_generator.generate_puzzle(level)
         self.game.initial_sudoku = SudokuBoard() 
-        self.game.initial_sudoku.from_dictionary(puzzle)
+        self.game.initial_sudoku.from_dictionary(puzzle,True)
         self.game.user_sudoku = SudokuBoard()
-        self.game.user_sudoku.from_dictionary(puzzle)
+        self.game.user_sudoku.from_dictionary(puzzle,True)
     
     def validate(self):
         '''

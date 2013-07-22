@@ -7,53 +7,118 @@ Created on Jul 16, 2013
 import os
 import sys
 import getopt
-from sudoku.console.pysudoku import PySudoku
 
+from sudoku.game.Game import Game
+from sudoku.game.CommandFactory import CommandFactory
+from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
+from sudoku.model.exception.CellNotEditableException import CellNotEditableException
+from sudoku.settings.SettingsManager import SettingsManager
+from sudoku.generator.generator import Generator
 
 class Console(object):
     '''
-    classdocs
+    Console class is defining console to receive an input from user
     '''
-
 
     def __init__(self):
         '''
         Constructor
         '''
-    
+        self.settings_manager = SettingsManager('mySettings.xml')
+        self.settings_manager.load()
+        self.generator = Generator()
+        self.game = Game()
+        self.game.set_settings_manager(self.settings_manager)
+        self.game.set_game_generator(self.generator)
+        self.factory = CommandFactory(self.game)
+        
+        
+   
     def read_command(self):
+        '''
+        Read_command function reads the user command input
+        '''
         cmd = input("PY-SUDOKU #") 
         return cmd
     
-    def parse_command(self, cmd):
-        cmdSplit = cmd.split(" ")
-        if len(cmdSplit) == 5:
-            return cmdSplit
-        return None
-    
-    def execute_command_solve(self, cmd):
-                  
-        if cmd:
-            if cmd[0]=="-input" and cmd[3]=="-settings":
-                try:
-                    print("Execute {%s [%s][%s]%s[%s]}" %(cmd[0], cmd[1],cmd[2],cmd[3],cmd[4]))
-                    new = PySudoku()
-                    new.solve_sudoku(cmd[1],cmd[2],cmd[4])
-                 
-                except ValueError as e :
-                    print ("'%s' is not a valid command." % e.args[0].split(": ")[1])
-            else:
-                print ("The commands are incorrect, please try again")
-            
-        else:
-            print("The command is incorrect, please try again")
-            
-    def execute_command_generate(self, cmd):
+    def parse_parameter(self, paramStr, params):
+        '''
+        Parse_parameter function verifies if a parameter and its value is correct.
+        If the parameter is correct then it is saved in params dictionary with the paramName as key and paramValue as value.
         
-        if cmd:
+        '''
+        #verify is correct
+        
+        if paramStr[0] != '/':
+            return False
+            InvalidCmdParametersException("The parameter doesn't contain / character.")
+        
+        paramSplit = paramStr.split("=")
+        if len(paramSplit) != 2:
+            InvalidCmdParametersException("The parameter doesn't contain > character.")
+        paramName = paramSplit[0][1:]
+        paramValue = paramSplit[1]
+        
+        params[paramName] = paramValue
+        return params    
+    
+    def parse_command(self, cmd):
+        '''
+        Parse_command function verifies if a command is correct.
+        The entire string of user is split in commands and parameters. Only the Command is returned.
+        '''
+        cmdSplit = cmd.split(" ")
+        
+        if len(cmdSplit) > 0:
+            cmdName = cmdSplit[0]
+            params = {}
             
-            print("Execute {%s [%s][%s]%s[%s]}" %(cmd[0], cmd[1],cmd[2],cmd[3],cmd[4]))
-            new = PySudoku()
-            new.generate_sudoku()
+            for param in cmdSplit[1:]:
+                try:
+                    self.parse_parameter(param, params)
+                except:
+                    return None
+            if params=={}:
+                params=None
+                    
+            #generate command
+            try:
+                cmd = self.factory.getCommand(cmdName, params)
+            except :
+                InvalidCmdParametersException("The command is not valid.")
+                return None
+            return cmd 
+                
+    def execute_command(self, cmd):
+        '''
+        Execute_command function execute a command given by user
+        '''
+        print(cmd)
+        if cmd: 
+            response = cmd.execute()
+            if response: 
+                print(response)
         else:
             print("The command is incorrect, please try again")
+            
+    def run(self):
+        '''
+        Run function calls the execute_command function if command previously given by user has been parsed in a correct way.
+        The sudoku game is being print every time a value or hint has been set.
+        '''
+        while True:
+            cmdLine = self.read_command()
+            print_cmd = self.parse_command("print")
+            
+            if not cmdLine=="":
+                cmd = self.parse_command(cmdLine)
+                try:
+                    print (cmdLine)
+                    print (cmd)
+                    self.execute_command(cmd)
+                    os.system('cls')
+                    self.execute_command(print_cmd)
+                except CellNotEditableException:
+                    print("Cell is not editable")
+                except Exception as e:
+                    print("Ooops unexpected Exception ", e)

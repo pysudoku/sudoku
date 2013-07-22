@@ -110,10 +110,10 @@ class SudokuBoard:
             for col in self.cols:
                 value = dictionary[row + str(col)]
                 self.set_value(row, col, value)
+                self.set_editable(row, col, True)
                 if  change_editable and value != '0' and value != '.': 
                     self.set_editable(row, col, False)
-                else:
-                    self.set_editable(row, col, True)
+                    
                 
     def to_dictionary(self):
         '''

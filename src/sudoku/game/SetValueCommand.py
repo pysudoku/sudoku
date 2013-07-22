@@ -32,7 +32,7 @@ class SetValueCommand(SudokuCommand):
         elif self.game.user_sudoku == None:
             raise InvalidCmdParametersException("The Sudoku was not loaded.")
         
-        self.game.user_sudoku.set_value(self.readconfig_parameters[self.ROW_PARAM], self.readconfig_parameters[self.COLUMN_PARAM], self.readconfig_parameters[self.VALUE_PARAM])
+        self.game.user_sudoku.set_value(self.readconfig_parameters[self.ROW_PARAM], int( self.readconfig_parameters[self.COLUMN_PARAM]), self.readconfig_parameters[self.VALUE_PARAM])
         
     def validate(self):
         '''
