@@ -35,6 +35,8 @@ from unitTests.game.TestHintCommand import TestHintCommand
 from unitTests.game.TestCommandFactory import TestCommandFactory
 from unitTests.generator.test_generator import TestGenerator
 from unitTests.game.test_generate_game import TestGenerateGameCommand
+from unitTests.console.test_console import TestConsole
+from unitTests.game.test_printCommand import TestPrintBoardCommand
 
 
 def main():
@@ -65,6 +67,8 @@ def main():
     suite.addTest(unittest.makeSuite(TestCommandFactory))
     suite.addTest(unittest.makeSuite(TestGenerator))
     suite.addTest(unittest.makeSuite(TestGenerateGameCommand))
+    suite.addTest(unittest.makeSuite(TestPrintBoardCommand))
+    suite.addTest(unittest.makeSuite(TestConsole))
 
     unittest.TextTestRunner(verbosity = 2).run(suite)
     

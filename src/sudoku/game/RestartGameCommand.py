@@ -29,7 +29,7 @@ class RestartGameCommand(SudokuCommand):
         elif self.game.initial_sudoku == None:
             raise InvalidCmdParametersException("The Sudoku was not loaded.")
         
-        self.game.user_sudoku=SudokuBoard()  
+        self.game.user_sudoku=SudokuBoard(self.game.user_sudoku.size)  
         self.game.user_sudoku.from_dictionary(self.game.initial_sudoku.to_dictionary(),True)
         
     def validate(self):

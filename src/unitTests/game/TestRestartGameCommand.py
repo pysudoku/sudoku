@@ -80,8 +80,8 @@ class TestRestartGameCommand(unittest.TestCase):
         sudoku = SudokuBoard(3)
         user_sudoku = SudokuBoard(3)
         
-        sudoku.from_dictionary(self.solved_sudoku)
-        user_sudoku.from_dictionary(self.user_sudoku)
+        sudoku.from_dictionary(self.solved_sudoku,True)
+        user_sudoku.from_dictionary(self.user_sudoku,True)
         
         game = Game()
         game.initial_sudoku = sudoku
