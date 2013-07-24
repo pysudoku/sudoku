@@ -25,7 +25,9 @@ class Game(object):
         self.currentTime = 0.0
         self.started = False
         self.paused = False
-    
+        self.game_generator = None
+        self.solver_algorithm = None
+
     def set_settings_manager(self, settingsManager):
         '''
         Sets the setting manager value
@@ -59,3 +61,15 @@ class Game(object):
     
     def get_current_time(self):
         return self.currentTime
+
+    def set_game_generator(self, generator):
+        '''
+        Sets the generator object the game uses to generate Sudoku puzzles
+        '''
+        self.game_generator = generator
+        
+    def set_solver(self, solver_algorithm):
+        '''
+        Sets the solver object the game uses to solve Sudoku puzzles
+        '''
+        self.solver_algorithm = solver_algorithm
