@@ -40,7 +40,7 @@ class TestCommandFactory(unittest.TestCase):
     def test_given_cmd_readconfigration_then_should_get_the_readconfiguration_cmd_properly(self):
         game = Game()
         factory = CommandFactory(game)
-        cmd = factory.getCommand("readConfiguration", self.readconfig_parameters)
+        cmd = factory.getCommand("readConfig", self.readconfig_parameters)
         
         self.assertTrue(isinstance(cmd, ReadConfigurationCommand))
         

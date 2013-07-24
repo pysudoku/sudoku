@@ -25,10 +25,10 @@ class PauseCommand(SudokuCommand):
         if self.game == None:
             raise InvalidCmdParametersException("The command needs a game.")
         if not self.game.is_started():
-            raise InvalidCmdParametersException("It is not possible to stop a non started game.")
+            raise InvalidCmdParametersException("It is not possible to pause a non started game.")
         
         self.game.pause_game_timer()
-        return str(self.game.get_current_time())
+        return "Time> " + str(self.game.get_current_time()) + " seg."
         
     def validate(self):
         '''

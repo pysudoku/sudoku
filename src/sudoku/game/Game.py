@@ -35,6 +35,8 @@ class Game(object):
         self.settings_manager = settingsManager
         
     def start_game_timer(self):
+        if not self.paused:
+            self.currentTime = 0.0
         self.paused = False
         self.started = True
         self.startTime =  time.clock()

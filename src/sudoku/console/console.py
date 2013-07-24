@@ -48,7 +48,6 @@ class Console(object):
         
         '''
         #verify is correct
-        
         if paramStr[0] != '/':
             return False
             InvalidCmdParametersException("The parameter doesn't contain / character.")
@@ -93,7 +92,6 @@ class Console(object):
         '''
         Execute_command function execute a command given by user
         '''
-        print(cmd)
         if cmd: 
             response = cmd.execute()
             if response: 
@@ -113,11 +111,8 @@ class Console(object):
             if not cmdLine=="":
                 cmd = self.parse_command(cmdLine)
                 try:
-                    print (cmdLine)
-                    print (cmd)
-                    self.execute_command(cmd)
                     os.system('cls')
-                    self.execute_command(print_cmd)
+                    self.execute_command(cmd)
                 except CellNotEditableException:
                     print("Cell is not editable")
                 except Exception as e:

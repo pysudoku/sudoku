@@ -21,7 +21,7 @@ class CommandFactory(object):
     '''
     ABOUT_COMMAND = "about"
     RESTART_GAME_COMMAND = "restart"
-    READ_CONFIGURATION_COMMAND = "readConfiguration"
+    READ_CONFIGURATION_COMMAND = "readConfig"
     HINT_COMMAND = "hint"
     SET_VALUE_COMMAND = "setValue"
     PRINT_COMMAND = "print"
