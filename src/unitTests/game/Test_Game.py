@@ -19,7 +19,6 @@ class TestGame(unittest.TestCase):
         self.assertIsNone(game.user_sudoku)
         self.assertIsNone(game.solved_sudoku)
 
-
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

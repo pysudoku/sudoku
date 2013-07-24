@@ -9,11 +9,11 @@ import sys
 import getopt
 
 from sudoku.game.Game import Game
-from sudoku.game.CommandFactory import CommandFactory
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
 from sudoku.model.exception.CellNotEditableException import CellNotEditableException
 from sudoku.settings.SettingsManager import SettingsManager
 from sudoku.generator.generator import Generator
+from sudoku.game.CommandFactory import CommandFactory
 
 class Console(object):
     '''
@@ -122,3 +122,4 @@ class Console(object):
                     print("Cell is not editable")
                 except Exception as e:
                     print("Ooops unexpected Exception ", e)
+

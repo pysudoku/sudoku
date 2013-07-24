@@ -34,6 +34,10 @@ class SudokuCommand(object):
         Abstract function that will validate the parameters of the command. It will be implemented in every command
         '''
         
+    def validate_needed_parameters(self):
+        if self.readconfig_parameters != None and len(self.readconfig_parameters) != 0:
+            raise InvalidCmdParametersException("The command no need parameters.")
+        
     def validate_parameter_number(self, number):
         '''
         Validate the number of parameters that is given in the command
