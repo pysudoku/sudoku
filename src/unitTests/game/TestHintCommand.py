@@ -92,7 +92,21 @@ class TestHintCommand(unittest.TestCase):
     
     def test_given_a_valid_parameters_and_none_user_sudoku_then_should_raise_an_exception(self):
         game = Game()
+        game.started = True
         cmd = HintCommand(self.hint_parameters)
+        cmd.set_game(game)
+        
+        try:
+            cmd.execute()
+            self.fail("Expected InvalidCmdParametersException was not raised.")
+        except InvalidCmdParametersException:
+            pass
+        
+    def test_when_valid_parameters_and_valid_game_and_the_game_is_not_started_then_an_exception_should_be_trown_saying_the_game_is_not_starting(self):
+        cmd = HintCommand(self.hint_parameters)
+        
+        game = Game()
+        game.user_sudoku = SudokuBoard(3)
         cmd.set_game(game)
         
         try:
@@ -111,6 +125,7 @@ class TestHintCommand(unittest.TestCase):
         solved_sudoku.from_dictionary(self.solved_sudoku)
         
         game = Game()
+        game.started = True
         game.initial_sudoku = initial_sudoku
         game.user_sudoku = user_sudoku
         game.solved_sudoku = solved_sudoku

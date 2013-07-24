@@ -38,5 +38,4 @@ class About(SudokuCommand):
         '''
         Validate number of parameters that the command has
         '''
-        if self.readconfig_parameters != None and len(self.readconfig_parameters) != 0:
-            raise InvalidCmdParametersException("The About command no need parameters.")
+        self.validate_needed_parameters()

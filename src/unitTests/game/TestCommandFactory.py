@@ -11,6 +11,9 @@ from sudoku.game.RestartGameCommand import RestartGameCommand
 from sudoku.game.ReadConfigurationCommand import ReadConfigurationCommand
 from sudoku.game.HintCommand import HintCommand
 from sudoku.game.SetValueCommand import SetValueCommand
+from sudoku.game.startCommand import StartCommand
+from sudoku.game.stopCommand import StopCommand
+from sudoku.game.pauseCommand import PauseCommand
 
 
 class TestCommandFactory(unittest.TestCase):
@@ -54,6 +57,27 @@ class TestCommandFactory(unittest.TestCase):
         cmd = factory.getCommand("setValue", self.set_value_parameters)
         
         self.assertTrue(isinstance(cmd, SetValueCommand))
+    
+    def test_given_cmd_start_then_should_get_the_start_cmd_properly(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("start", None)
+        
+        self.assertTrue(isinstance(cmd, StartCommand))
+        
+    def test_given_cmd_stop_then_should_get_the_stop_cmd_properly(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("stop", None)
+        
+        self.assertTrue(isinstance(cmd, StopCommand))
+        
+    def test_given_cmd_pause_then_should_get_the_pause_cmd_properly(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("pause", None)
+        
+        self.assertTrue(isinstance(cmd, PauseCommand))
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

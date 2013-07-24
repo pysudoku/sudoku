@@ -1,14 +1,14 @@
 '''
-Created on Jul 17, 2013
+Created on Jul 18, 2013
 
 @author: Jimena Terceros
 '''
 from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
 
-class RestartGameCommand(SudokuCommand):
+class StartCommand(SudokuCommand):
     '''
-    RestartGameCommand class is defining the command restart
+    This command is defined to start_game_timer the game. It is inheriting of SudokuCommand class
     '''
 
     def __init__(self, params):
@@ -25,10 +25,8 @@ class RestartGameCommand(SudokuCommand):
             raise InvalidCmdParametersException("The command needs a game.")
         elif self.game.user_sudoku == None:
             raise InvalidCmdParametersException("The Sudoku was not loaded.")
-        elif self.game.initial_sudoku == None:
-            raise InvalidCmdParametersException("The Sudoku was not loaded.")
         
-        self.game.user_sudoku.from_dictionary(self.game.initial_sudoku.to_dictionary())
+        self.game.start_game_timer()
         
     def validate(self):
         '''

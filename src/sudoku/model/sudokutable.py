@@ -33,7 +33,8 @@ class SudokuBoard:
         self.rows = []
         self.valid_values = []
         for value in range(0, max_size):
-            self.valid_values.append(str(value)) 
+            self.valid_values.append(str(value))
+        self.valid_values.append('.')
         for r in range(0, self.size):
             self.rows.append(chr(65 + r))
             

@@ -16,7 +16,7 @@ class TestSetValueCommand(unittest.TestCase):
         self.valid_value = '5'
         self.cell = "B3"
         self.clear_params = {}
-        self.hint_parameters = {"row": 'B', "column": 3, "value": self.valid_value}
+        self.valid_parameters = {"row": 'B', "column": 3, "value": self.valid_value}
         self.invalid_number_of_params = {"row": 'B', "column": 3}
         self.invalid_row_params = {"roww": 'B', "column": 3, "value": self.valid_value}
         self.invalid_column_params = {"row": 'B', "columnw": 3, "value": self.valid_value}
@@ -89,7 +89,7 @@ class TestSetValueCommand(unittest.TestCase):
             pass
         
     def test_given_a_valid_parameters_and_none_game_then_should_raise_an_exception(self):
-        cmd = SetValueCommand(self.hint_parameters)
+        cmd = SetValueCommand(self.valid_parameters)
         
         try:
             cmd.execute()
@@ -99,7 +99,20 @@ class TestSetValueCommand(unittest.TestCase):
     
     def test_given_a_valid_parameters_and_none_user_sudoku_then_should_raise_an_exception(self):
         game = Game()
-        cmd = SetValueCommand(self.hint_parameters)
+        cmd = SetValueCommand(self.valid_parameters)
+        cmd.set_game(game)
+        
+        try:
+            cmd.execute()
+            self.fail("Expected InvalidCmdParametersException was not raised.")
+        except InvalidCmdParametersException:
+            pass
+        
+    def test_when_valid_parameters_and_valid_game_and_the_game_is_not_started_then_an_exception_should_be_trown_saying_the_game_is_not_starting(self):
+        cmd = SetValueCommand(self.valid_parameters)
+        
+        game = Game()
+        game.user_sudoku = SudokuBoard(3)
         cmd.set_game(game)
         
         try:
@@ -110,8 +123,9 @@ class TestSetValueCommand(unittest.TestCase):
     
     def test_given_a_valid_parameters_then_should_set_the_value_in_the_soduko_board(self):
         game = Game()
+        game.started = True
         game.user_sudoku = SudokuBoard(9)
-        cmd = SetValueCommand(self.hint_parameters)
+        cmd = SetValueCommand(self.valid_parameters)
         cmd.set_game(game)
         cmd.execute()
         

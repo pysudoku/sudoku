@@ -29,14 +29,14 @@ class TestRestartGameCommand(unittest.TestCase):
         except InvalidCmdParametersException:
             self.fail("The initializer should not raise an exception.")
             
-    def test_when_an_about_cmd_is_created_with_clear_parameter_then_should_pass_validation(self):
+    def test_when_an_restart_cmd_is_created_with_clear_parameter_then_should_pass_validation(self):
         dict = {}
         try:
             restart = RestartGameCommand(dict)
         except InvalidCmdParametersException:
             self.fail("The initializer should not raise an exception.")
             
-    def test_when_an_about_cmd_is_created_with_no_clear_parameter_then_should_raise_an_exception(self):
+    def test_when_an_restart_cmd_is_created_with_no_clear_parameter_then_should_raise_an_exception(self):
         dict = {"param": 5}
         try:
             restart = RestartGameCommand(dict)

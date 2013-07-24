@@ -30,6 +30,15 @@ class HintCommand(SudokuCommand):
             raise InvalidCmdParametersException("The command needs a game.")
         elif self.game.user_sudoku == None:
             raise InvalidCmdParametersException("The Sudoku was not loaded.")
+        if not self.game.is_started():
+            raise InvalidCmdParametersException("It is not possible to hint if the game is not started.")
+        
+        '''
+        if self.game.solved_sudoku == None:
+            solverCommand = SolverCommand(None)
+            solverCommand.set_game(self.game)
+            solverCommand.execute()
+        '''
         
         if self.game.user_sudoku.is_editable(self.readconfig_parameters[self.ROW_PARAM], self.readconfig_parameters[self.COLUMN_PARAM]):
             value = self.game.solved_sudoku.get_value(self.readconfig_parameters[self.ROW_PARAM], self.readconfig_parameters[self.COLUMN_PARAM])
