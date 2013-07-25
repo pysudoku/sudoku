@@ -6,6 +6,7 @@ Created on Jul 17, 2013
 from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.model.sudokutable import SudokuBoard
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
+from sudoku.game.PrintCommand import PrintBoardCommand
 
 class GenerateGameCommand(SudokuCommand):
     '''

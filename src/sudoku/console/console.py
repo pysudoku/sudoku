@@ -14,6 +14,7 @@ from sudoku.model.exception.CellNotEditableException import CellNotEditableExcep
 from sudoku.settings.SettingsManager import SettingsManager
 from sudoku.generator.generator import Generator
 from sudoku.game.CommandFactory import CommandFactory
+from sudoku.game.PrintCommand import PrintBoardCommand
 
 class Console(object):
     '''
@@ -113,8 +114,10 @@ class Console(object):
                 try:
                     os.system('cls')
                     self.execute_command(cmd)
+                    if not isinstance(cmd,  PrintBoardCommand):
+                        self.execute_command(print_cmd)
                 except CellNotEditableException:
                     print("Cell is not editable")
                 except Exception as e:
-                    print("Ooops unexpected Exception ", e)
+                    print("Ooops: ", e)
 

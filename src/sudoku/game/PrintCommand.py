@@ -36,27 +36,36 @@ class PrintBoardCommand(SudokuCommand):
         '''
         Receives a sudoku as string and print in console as a table 
         '''
-        print("The sudoku table is : ")
+        print("The sudoku is : ")
                 
         str_result = self.dict_to_str(sudoku)
-        barra=""
-        for i in range(0,8):
+        barra=" "
+        header="   "
+        for i in range(0,self.game.user_sudoku.size):
             barra += "·---"
+            header = header + " " + str(i + 1) + " "
+            if((i+1) % 3 == 0):
+                header = header + "   "
+        
+        print(header)
+        print(barra)
 
         n=9
         rownumbers=[str_result[i:i+n]for i in range(0, len(str_result), n)]
-
+        
         counter=0
+        row_index = 0
         for row in rownumbers:
-            cadena=""
+            cadena=self.row_labels[row_index] + " |"
             block= ('|'.join([row[i:i+3] for i in range(0, len(row), 3)]))
             for number in block:
                 cadena += " "+ number + " "
 
-            print (cadena+"\n")
+            print (cadena)
             counter+=1
             if counter==3 or counter==6:
-                print (barra+"\n")
+                print (barra)
+            row_index = row_index + 1
                 
                 
     row_labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H','I']
