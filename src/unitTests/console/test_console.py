@@ -13,6 +13,9 @@ from sudoku.game.RestartGameCommand import RestartGameCommand
 from sudoku.game.SetValueCommand import SetValueCommand
 from sudoku.game.HintCommand import HintCommand
 from sudoku.game.About import About
+from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
+from sudoku.game.Game import Game
+from sudoku.game.Quit import QuitCommand
 
 
 class TestConsole(unittest.TestCase):
@@ -30,15 +33,16 @@ class TestConsole(unittest.TestCase):
         except Exception as e:
             self.fail("Exception has been raised",e)
             
-    def test_to_verify_if_parameter_is_not_parsed_correct_an_exception_is_raised(self): 
+    def test_to_verify_if_parameter_is_not_parsed_correct_with_equal_character_an_exception_is_raised(self): 
+        
         try:
-            self.parameters= "wrong_parameter"
+            self.command= "generate /Incorrect"
             console=Console()
-            params={}
-            result = console.parse_parameter(self.parameters,params)
+            result = console.parse_command(self.command)
             self.assertTrue(True)
         except Exception as e:
             self.fail("Exception has been raised",e)
+        
             
     def test_to_verify_if_parameter_is_parsed_correct_if_it_comes_with_special_charater_slash_(self): 
         
@@ -79,6 +83,27 @@ class TestConsole(unittest.TestCase):
         console=Console()
           
         self.assertIsInstance(console.parse_command(self.command), HintCommand,"Is not instance")
+        
+    def test_to_verify_that_parse_command_raise_an_exception_if_command_is_not_in_Commands_application(self):   
+        try:
+            self.command= "Generate"
+            console = Console()
+            result = console.parse_command(self.command)
+            self.fail("Expected InvalidCmdParametersException was not raised.")
+        except InvalidCmdParametersException:
+            pass
+        
+    def test_to_verify_if_execute_command_function_execute_a_command(self):
+        console = Console()
+        cmd = About(None)
+        result = console.execute_command(cmd)     
+        self.assertEqual(None, None)
+        
+    def test_to_verify_if_execute_command_function_does_not_execute_a_command(self):
+        console = Console()
+        cmd = None
+        result = console.execute_command(cmd) 
+        self.assertEqual(None, result)
     
    
        

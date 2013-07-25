@@ -49,12 +49,11 @@ class Console(object):
         '''
         #verify is correct
         if paramStr[0] != '/':
-            return False
-            InvalidCmdParametersException("The parameter doesn't contain / character.")
+            raise  InvalidCmdParametersException("The parameter doesn't contain / character.")
         
         paramSplit = paramStr.split("=")
         if len(paramSplit) != 2:
-            InvalidCmdParametersException("The parameter doesn't contain > character.")
+            raise InvalidCmdParametersException("The parameter doesn't contain = character.")
         paramName = paramSplit[0][1:]
         paramValue = paramSplit[1]
         
@@ -84,8 +83,8 @@ class Console(object):
             try:
                 cmd = self.factory.getCommand(cmdName, params)
             except :
-                InvalidCmdParametersException("The command is not valid.")
-                return None
+                raise InvalidCmdParametersException("The command is not valid.")
+                #return None
             return cmd 
                 
     def execute_command(self, cmd):
@@ -94,8 +93,9 @@ class Console(object):
         '''
         if cmd: 
             response = cmd.execute()
-            if response: 
+            if response:
                 print(response)
+            
         else:
             print("The command is incorrect, please try again")
             
@@ -113,8 +113,10 @@ class Console(object):
                 try:
                     os.system('cls')
                     self.execute_command(cmd)
+                    self.execute_command(print_cmd)
                 except CellNotEditableException:
-                    print("Cell is not editable")
+                    print("Cell is not editable!!!")
+                    self.execute_command(print_cmd)
                 except Exception as e:
                     print("Ooops unexpected Exception ", e)
 

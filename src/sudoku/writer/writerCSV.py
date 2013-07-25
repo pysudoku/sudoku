@@ -31,10 +31,10 @@ class WriterCSV(Writer):
     
     def write(self,sudoku,filename_user):
         if os.path.isfile(filename_user):
-            #file exists then rename it
+            #file exists then create it
             new_file = open(self.createNewFilename(filename_user), 'w')
         else:
-            #file does not exist, lets create it
+            #file does  exist, lets open it
             new_file = open(filename_user, 'w')
             
         str_result = self.dict_to_str(sudoku)
@@ -52,19 +52,22 @@ class WriterCSV(Writer):
         return True
 
     def createNewFilename(self, filename_user):
-        now = datetime.datetime.now()
-        now=now.replace(microsecond=0)
-        now=now.strftime("%B %d, %Y")
+        
+        name_copied_file = os.path.basename(filename_user)
+        os.path.splitext(name_copied_file)
+        name_copied_file = os.path.splitext(name_copied_file)[0]
+        
         ticks = time.time()
-
-        stringname=now+str(ticks)
+        stringname=str(ticks)
         str.translate(stringname, ',.')
         for c in string.punctuation:
-            stringname= stringname.replace(c,"")
-        stringname=stringname+".csv"
-        path = os.path.dirname(filename_user)
+            stringname = stringname.replace(c,"")
         
-        return path + "\\" + stringname
+        stringname = stringname + ".csv"
+        path = os.path.dirname(filename_user)
+        name_file = path +"\\"+ name_copied_file +"_" + stringname
+
+        return name_file
 
 
     

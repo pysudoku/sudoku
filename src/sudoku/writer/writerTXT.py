@@ -66,19 +66,20 @@ class WriterTXT(Writer):
         return True
 
     def createNewFilename(self, filename_user):
-        now = datetime.datetime.now()
-        now=now.replace(microsecond=0)
-        now=now.strftime("%B %d, %Y")
+        name_copied_file = os.path.basename(filename_user)
+        os.path.splitext(name_copied_file)
+        name_copied_file = os.path.splitext(name_copied_file)[0]
+        
         ticks = time.time()
-
-        stringname=now+str(ticks)
+        stringname=str(ticks)
         str.translate(stringname, ',.')
         for c in string.punctuation:
-            stringname= stringname.replace(c,"")
-        stringname=stringname+".txt"
+            stringname = stringname.replace(c,"")
         
+        stringname = stringname + ".txt"
         path = os.path.dirname(filename_user)
-        
-        return path + "\\" + stringname
+        name_file = path +"\\"+ name_copied_file +"_" + stringname
+
+        return name_file
 
 

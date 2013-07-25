@@ -8,23 +8,40 @@ from tkinter import ttk
 from tkinter import font
 
 
-class SudokuGameWindow():
-    
-    def initUI(self):
-    
-        root = Tk()
-        root.geometry("600x650+300+300")
-        root.title('Sudoku Game')
 
-        content = ttk.Frame(root)
-        frame = ttk.Frame(content, borderwidth=5, relief="sunken", width=500, height=500)
+
+from tkinter.filedialog import askopenfilename
+
+
+class SudokuGameWindow(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.boardsize = 405
+        self.sqsize = self.boardsize//9
+        master.geometry("600x650+300+300")
+        master.title('Sudoku Game')
+        self.initialdraw()
+        self.grid(row=0,column=0)
+    
+    def initialdraw(self):
+    
+        #root = Tk()
+        #root.geometry("600x650+300+300")
+        #root.title('Sudoku Game')
+
+        content = ttk.Frame(self,padding=(70,70,5,5))
+        
         
         self.customFont_title = font.Font(family="Helvetica",size=18,weight="bold")
         self.customFont_label = font.Font(family="Comic Sans",size=12,weight="bold")
         title_lbl = ttk.Label(content, text = "Sudoku Game",font=self.customFont_title)
         time_lbl=ttk.Label(content,text = "Timer:",font=self.customFont_label)
         
-        level_sudoku_tab = ttk.Notebook(root,width=400,height=400)
+        level_sudoku_tab = ttk.Notebook(content,width=405,height=405)
+        
+        
+        #self.board = Canvas(content, width=self.boardsize, height=self.boardsize,bg='white')
+        
 
         tab1 = Frame(level_sudoku_tab)
         tab2 = Frame(level_sudoku_tab)
@@ -51,10 +68,10 @@ class SudokuGameWindow():
        
         #----- Grid Distribution-------
         content.grid(column=0, row=0)
-        frame.grid(column=0, row=1, columnspan=5, rowspan=2)
-        title_lbl.grid(column=3, row=0, columnspan=1)
+        
+        title_lbl.grid(column=2, row=0, columnspan=1)
         time_lbl.grid(column=5,row=2, columnspan=1)
-        level_sudoku_tab.grid(column=0,row=0,columnspan=4, rowspan=2)
+        level_sudoku_tab.grid(column=0, row=1, columnspan=5, rowspan=2)
        
         start_btn.grid(column=5, row=3)
         pause_btn.grid(column=5, row=4)
@@ -69,15 +86,31 @@ class SudokuGameWindow():
         quit_btn.grid(column=2, row=5)
         
         # ----------Grid----------
-       # name=
+       # command=printBoardCommand()
+       
+       
+         
+    
+       
+        """
+        self.board.grid(row=1,column=0,padx=(100,10),pady=(100,10))
         
+        for row in range(9):
+            for col in range(9):
+                top = row * self.sqsize
+                left = col * self.sqsize
+                bottom = row * self.sqsize + self.sqsize -2
+                right = col * self.sqsize + self.sqsize -2
+                rect = self.board.create_rectangle(left,top,right,bottom,outline='gray',fill='')
+
+        self.board.focus_set()
         #-------------------------
+        """
         
         
         
         
         
-        root.mainloop()
 
     def onStartButtonClick(self):
         print ("You clicked the Start  Game Timer button !")
@@ -86,7 +119,8 @@ class SudokuGameWindow():
     def onStopButtonClick(self):
         print ("You clicked the Stop Game Timer button !")
     def onLoadButtonClick(self):
-        print ("You clicked the Load Game button !")
+        print ("You clicked the Load Game button !") 
+        filename = askopenfilename (filetypes=[("allfiles","*"),("TXTfiles","*.txt")])
     def onRestartButtonClick(self):
         print ("You clicked the Restart Game button !")
     def onHintButtonClick(self):
@@ -102,10 +136,12 @@ class SudokuGameWindow():
     def onPressEnter(self,event):
         print ("You pressed enter !")
       
-  
+if __name__ == '__main__':
+    tk = Tk()
+    sudoku_gameUI = SudokuGameWindow(tk)
+    tk.mainloop()  
         
-app=SudokuGameWindow()
-app.initUI()
+
       
 
 

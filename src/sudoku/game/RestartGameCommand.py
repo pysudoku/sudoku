@@ -36,5 +36,4 @@ class RestartGameCommand(SudokuCommand):
         '''
         Validate number of parameters and the parameter of the command
         '''
-        if self.readconfig_parameters != None and len(self.readconfig_parameters) != 0:
-            raise InvalidCmdParametersException("The command no need parameters.")
+        self.validate_needed_parameters()

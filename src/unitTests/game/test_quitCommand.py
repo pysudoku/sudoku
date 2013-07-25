@@ -18,7 +18,11 @@ class TestQuit(unittest.TestCase):
     def test_when_a_quit_cmd_is_executed_user_leave_the_application(self):
         pass
             
-        
+    def test_when_an_quit_cmd_is_created_with_None_parameter_then_should_pass_validation(self):
+        try:
+            result = QuitCommand(None)
+        except InvalidCmdParametersException:
+            self.fail("The initializer should not raise an exception.")  
             
   
 if __name__ == "__main__":

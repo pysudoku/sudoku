@@ -14,6 +14,9 @@ from sudoku.game.SetValueCommand import SetValueCommand
 from sudoku.game.startCommand import StartCommand
 from sudoku.game.stopCommand import StopCommand
 from sudoku.game.pauseCommand import PauseCommand
+from sudoku.game.Quit import QuitCommand
+from sudoku.game import PrintCommand
+from sudoku.game.PrintCommand import PrintBoardCommand
 
 
 class TestCommandFactory(unittest.TestCase):
@@ -78,6 +81,18 @@ class TestCommandFactory(unittest.TestCase):
         cmd = factory.getCommand("pause", None)
         
         self.assertTrue(isinstance(cmd, PauseCommand))
+    def test_given_cmd_quit_then_should_get_the_quit_cmd_properly(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("quit", None)
+        
+        self.assertTrue(isinstance(cmd, QuitCommand))
+    def test_given_cmd_print_then_should_get_the_print_cmd_properly(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("print", None)
+        
+        self.assertTrue(isinstance(cmd, PrintBoardCommand))
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

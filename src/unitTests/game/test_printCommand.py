@@ -54,7 +54,32 @@ class TestPrintBoardCommand(unittest.TestCase):
         except Exception as e:
             self.fail("Exception has been raised",e)
             
+    def test_when_an_print_cmd_is_created_with_None_parameter_then_should_pass_validation(self):
+        try:
+            restart = PrintBoardCommand(None)
+        except InvalidCmdParametersException:
+            self.fail("The initializer should not raise an exception.")
+            
+    def test_given_a_valid_parameters_and_none_game_then_should_raise_an_exception(self):
+        cmd = PrintBoardCommand(None)
+        
+        try:
+            cmd.execute()
+            self.fail("Expected InvalidCmdParametersException was not raised.")
+        except InvalidCmdParametersException:
+            pass
     
+    def test_given_a_valid_parameters_and_none_user_sudoku_then_should_raise_an_exception(self):
+        game = Game()
+        game.started = True
+        cmd = PrintBoardCommand(None)
+        cmd.set_game(game)
+        
+        try:
+            cmd.execute()
+            self.fail("Expected InvalidCmdParametersException was not raised.")
+        except InvalidCmdParametersException:
+            pass
             
 
 

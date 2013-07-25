@@ -20,7 +20,12 @@ class PrintBoardCommand(SudokuCommand):
     def execute(self):
         '''
         Print the sudoku table in console
-        '''        
+        '''
+        if self.game == None:
+            raise InvalidCmdParametersException("The command needs a game.")
+        elif self.game.user_sudoku == None:
+            raise InvalidCmdParametersException("The Sudoku was not loaded.")
+                
         self.write(self.game.user_sudoku.to_dictionary())
         
         
@@ -28,15 +33,14 @@ class PrintBoardCommand(SudokuCommand):
         '''
         Validate number of parameters and the parameter of the command
         '''
-        if self.readconfig_parameters != None and len(self.readconfig_parameters) != 0:
-            raise InvalidCmdParametersException("The command no need parameters.")
+        self.validate_needed_parameters()
  
  
     def write(self,sudoku):
         '''
         Receives a sudoku as string and print in console as a table 
         '''
-        print("The sudoku table is : ")
+        print(" SUDOKU GAME ")
                 
         str_result = self.dict_to_str(sudoku)
         barra=""
