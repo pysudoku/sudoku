@@ -1,5 +1,6 @@
 import unittest
 from sudoku.reader.commandlineparser import CommandLineParser
+from sudoku.reader.exception.fileformaterror import FileFormatError
 
 class TestCommandLineParser(unittest.TestCase):
 	def setUp(self):
@@ -24,15 +25,15 @@ class TestCommandLineParser(unittest.TestCase):
 									"000657804" +
 									"006423597",
 
-			'content_with_chars' :	".67.4...2" + 
-									"9..73.45." +
-									"4.5......" + 
-									"6...8...." + 
-									"...9..32." + 
-									"2835..649" + 
-									".7......3" + 
-									"...6578.4" +
-									"..6423597",
+			'content_with_chars' :	"-67-4---2" + 
+									"9--73-45-" +
+									"4-5------" + 
+									"6---8----" + 
+									"---9--32-" + 
+									"2835--649" + 
+									"-7------3" + 
+									"---6578-4" +
+									"--6423597",
 
 			'content_contains_more_than_9_lines' :	"067040002" + 
 													"900730450" +
@@ -48,7 +49,17 @@ class TestCommandLineParser(unittest.TestCase):
 			'content_contains_less_than_9_lines' :	"067040002" + 
 													"900730450" +
 													"000657804" +
-													"006423597"
+													"006423597",
+
+			'content_contains_a_dot_char' :	"067040002" + 
+											"900730450" +
+											"405000000" + 
+											"600080000" + 
+											"000900320" + 
+											"283500649" + 
+											"070000003" + 
+											"000657804" +
+											"00643.597",
 		}
 		self.cliparser = CommandLineParser()
 
@@ -87,6 +98,10 @@ class TestCommandLineParser(unittest.TestCase):
 	def test_a_SyntaxError_should_be_raised_if_parameter_contains_less_than_nine_columns(self):
 		with self.assertRaises(SyntaxError):
 			self.cliparser.parse_puzzle(self.test_data['content_contains_less_than_9_lines'])
+			
+	def test_an_FileFormatError_should_be_raised_if_parameter_contains_a_dot_char(self):
+		with self.assertRaises(FileFormatError):
+			self.cliparser.parse_puzzle(self.test_data['content_contains_a_dot_char'])
 
 if __name__ == '__main__':
 	unittest.main()

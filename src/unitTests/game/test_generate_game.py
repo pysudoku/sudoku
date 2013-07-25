@@ -19,7 +19,6 @@ class TestGenerateGameCommand(unittest.TestCase):
         self.invalid_params = {'level': 'EASY', "ANOTHER_PARAM": "ANOTHER_PARAM_VALUE"} 
         self.none_param = {'level': None}
         self.int_param = {'level': 2}
-        self.generator = Generator()
 
     def tearDown(self):
         pass
@@ -46,7 +45,6 @@ class TestGenerateGameCommand(unittest.TestCase):
         settings_manager.load()
         game = Game()
         game.set_settings_manager(settings_manager)
-        game.set_game_generator(self.generator)
         cmd = GenerateGameCommand(valid_params)
         cmd.set_game(game)
         cmd.execute()
@@ -57,7 +55,7 @@ class TestGenerateGameCommand(unittest.TestCase):
         settings_manager.load()
         game = Game()
         game.set_settings_manager(settings_manager)
-        game.set_game_generator(self.generator)
+        game.start_game_timer()
         cmd = GenerateGameCommand(None)
         cmd.set_game(game)
         cmd.execute()

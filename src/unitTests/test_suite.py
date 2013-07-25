@@ -40,6 +40,14 @@ from unitTests.game.test_printCommand import TestPrintBoardCommand
 from unitTests.game.TestStartCommand import TestStartCommand
 from unitTests.game.TestStopCommand import TestStopCommand
 from unitTests.game.TestPauseCommand import TestPauseCommand
+from unitTests.game.test_solve_game import TestSolveGameCommand
+from unitTests.reader.test_parser_factory import TestParserFactory
+from unitTests.writer.test_game_writer import TestSudokuGameWriter
+from unitTests.reader.test_game_reader import TestSudokuGameReader
+from unitTests.game.test_save_command import TestSaveGameCommand
+from unitTests.game.test_open_command import TestOpenGameCommand
+from unitTests.game.test_import import TestImportCommand
+from unitTests.game.test_export import TestExportCommand
 
 def main():
     suite = unittest.TestSuite()
@@ -74,6 +82,14 @@ def main():
     suite.addTest(unittest.makeSuite(TestStartCommand))
     suite.addTest(unittest.makeSuite(TestStopCommand))
     suite.addTest(unittest.makeSuite(TestPauseCommand))
+    suite.addTest(unittest.makeSuite(TestSolveGameCommand))
+    suite.addTest(unittest.makeSuite(TestParserFactory))
+    suite.addTest(unittest.makeSuite(TestSudokuGameWriter))
+    suite.addTest(unittest.makeSuite(TestSudokuGameReader))
+    suite.addTest(unittest.makeSuite(TestSaveGameCommand))
+    suite.addTest(unittest.makeSuite(TestOpenGameCommand))
+    suite.addTest(unittest.makeSuite(TestImportCommand))
+    suite.addTest(unittest.makeSuite(TestExportCommand))
 
     unittest.TextTestRunner(verbosity = 2).run(suite)
     

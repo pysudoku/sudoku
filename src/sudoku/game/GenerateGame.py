@@ -5,12 +5,13 @@ Created on Jul 17, 2013
 '''
 from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.model.sudokutable import SudokuBoard
+from sudoku.generator.generator import Generator
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
 
 
 class GenerateGameCommand(SudokuCommand):
     '''
-    classdocs
+    Generates a Sudoku puzzle and loads it to the current game
     '''
     LEVEL_NAME_PARAM = "level"
 
@@ -36,13 +37,16 @@ class GenerateGameCommand(SudokuCommand):
         
         level = self.game.settings_manager.settings.getLevel(self.readconfig_parameters[self.LEVEL_NAME_PARAM])
         if level is None:
-            level = self.game.settings_manager.settings.getLevel(self.game.settings_manager.settings.DEFAULT_LEVEL_NAME)
+            level = self.game.settings_manager.settings.getLevel(self.game.settings_manager.settings.getDefaultLevel())
 
-        puzzle = self.game.game_generator.generate_puzzle(level)
+        game_generator = Generator()
+        puzzle = game_generator.generate_puzzle(level)
         self.game.initial_sudoku = SudokuBoard() 
         self.game.initial_sudoku.from_dictionary(puzzle,True)
         self.game.user_sudoku = SudokuBoard()
         self.game.user_sudoku.from_dictionary(puzzle,True)
+        if self.game.is_started():
+            self.game.stop_game_timer()
     
     def validate(self):
         '''

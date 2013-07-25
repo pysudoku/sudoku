@@ -5,6 +5,9 @@ Created on Jul 17, 2013
 '''
 from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
+from sudoku.algorithm.AlgorithmFactory import AlgorithmFactory
+from sudoku.model.sudokutable import SudokuBoard
+
 
 class HintCommand(SudokuCommand):
     '''
@@ -32,16 +35,16 @@ class HintCommand(SudokuCommand):
         if not self.game.is_started():
             raise InvalidCmdParametersException("It is not possible to hint if the game is not started.")
         
-        '''
-        if self.game.solved_sudoku == None:
-            solverCommand = SolverCommand(None)
-            solverCommand.set_game(self.game)
-            solverCommand.execute()
-        '''
-        
-        if self.game.user_sudoku.is_editable(self.readconfig_parameters[self.ROW_PARAM], self.readconfig_parameters[self.COLUMN_PARAM]):
-            value = self.game.solved_sudoku.get_value(self.readconfig_parameters[self.ROW_PARAM], self.readconfig_parameters[self.COLUMN_PARAM])
-            self.game.user_sudoku.set_value(self.readconfig_parameters[self.ROW_PARAM], self.readconfig_parameters[self.COLUMN_PARAM], value)
+        if self.game.solved_sudoku is None:
+            algorithm_factory = AlgorithmFactory(self.game.settings_manager.settings.getAlgorithmName())
+            solving_algorithm = algorithm_factory.getAlgorithm()        
+            solution = solving_algorithm.solve(self.game.initial_sudoku.to_dictionary())
+            self.game.solved_sudoku = SudokuBoard() 
+            self.game.solved_sudoku.from_dictionary(solution, True)            
+                            
+        if self.game.user_sudoku.is_editable(self.readconfig_parameters[self.ROW_PARAM], int(self.readconfig_parameters[self.COLUMN_PARAM])):
+            value = self.game.solved_sudoku.get_value(self.readconfig_parameters[self.ROW_PARAM], int(self.readconfig_parameters[self.COLUMN_PARAM]))
+            self.game.user_sudoku.set_value(self.readconfig_parameters[self.ROW_PARAM], int(self.readconfig_parameters[self.COLUMN_PARAM]), value)
         
         
     def validate(self):

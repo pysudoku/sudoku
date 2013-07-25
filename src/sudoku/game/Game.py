@@ -25,8 +25,6 @@ class Game(object):
         self.currentTime = 0.0
         self.started = False
         self.paused = False
-        self.game_generator = None
-        self.solver_algorithm = None
 
     def set_settings_manager(self, settingsManager):
         '''
@@ -63,15 +61,11 @@ class Game(object):
     
     def get_current_time(self):
         return self.currentTime
-
-    def set_game_generator(self, generator):
-        '''
-        Sets the generator object the game uses to generate Sudoku puzzles
-        '''
-        self.game_generator = generator
-        
-    def set_solver(self, solver_algorithm):
-        '''
-        Sets the solver object the game uses to solve Sudoku puzzles
-        '''
-        self.solver_algorithm = solver_algorithm
+    
+    def copy(self, other_game):
+        self.initial_sudoku = other_game.initial_sudoku
+        self.user_sudoku = other_game.user_sudoku
+        self.solved_sudoku = other_game.solved_sudoku
+        self.currentTime = other_game.currentTime
+        self.started = other_game.started
+        self.paused = other_game.paused

@@ -5,14 +5,11 @@ Created on Jul 16, 2013
 '''
 
 import os
-import sys
-import getopt
 
 from sudoku.game.Game import Game
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
 from sudoku.model.exception.CellNotEditableException import CellNotEditableException
 from sudoku.settings.SettingsManager import SettingsManager
-from sudoku.generator.generator import Generator
 from sudoku.game.CommandFactory import CommandFactory
 
 class Console(object):
@@ -26,10 +23,8 @@ class Console(object):
         '''
         self.settings_manager = SettingsManager('mySettings.xml')
         self.settings_manager.load()
-        self.generator = Generator()
         self.game = Game()
         self.game.set_settings_manager(self.settings_manager)
-        self.game.set_game_generator(self.generator)
         self.factory = CommandFactory(self.game)
         
         

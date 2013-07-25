@@ -10,7 +10,7 @@ class Settings(object):
     ''' 
     
     DEFAULT_OUTPUT_TYPE = "Console"
-    DEFAULT_ALGORITHM_NAME = "Peter Norvic"
+    DEFAULT_ALGORITHM_NAME = "Peter Norvig"
     DEFAULT_LEVEL_NAME = "EASY"
     DEFAULT_MIN = 36
     DEFAULT_MAX = 49
