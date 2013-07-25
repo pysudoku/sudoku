@@ -41,11 +41,10 @@ class HintCommand(SudokuCommand):
             solution = solving_algorithm.solve(self.game.initial_sudoku.to_dictionary())
             self.game.solved_sudoku = SudokuBoard() 
             self.game.solved_sudoku.from_dictionary(solution, True)            
-                            
+        
         if self.game.user_sudoku.is_editable(self.readconfig_parameters[self.ROW_PARAM], int(self.readconfig_parameters[self.COLUMN_PARAM])):
             value = self.game.solved_sudoku.get_value(self.readconfig_parameters[self.ROW_PARAM], int(self.readconfig_parameters[self.COLUMN_PARAM]))
             self.game.user_sudoku.set_value(self.readconfig_parameters[self.ROW_PARAM], int(self.readconfig_parameters[self.COLUMN_PARAM]), value)
-        
         
     def validate(self):
         '''

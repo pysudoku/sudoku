@@ -35,6 +35,8 @@ class ImportCommand(SudokuCommand):
         self.game.initial_sudoku.from_dictionary(puzzle, True)
         self.game.user_sudoku = SudokuBoard()
         self.game.user_sudoku.from_dictionary(puzzle, True)
+        self.game.solved_sudoku = None
+
         if self.game.is_started():
             self.game.stop_game_timer()
         

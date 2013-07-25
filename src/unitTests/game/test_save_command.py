@@ -33,7 +33,7 @@ class TestSaveGameCommand(unittest.TestCase):
 
     def tearDown(self):
         try:
-            os.remove('test_game_file.sgf')
+            os.remove('game.sgf')
         except IOError:
             pass
 
