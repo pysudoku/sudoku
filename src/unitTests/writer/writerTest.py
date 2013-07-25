@@ -109,8 +109,8 @@ class TestWriter(unittest.TestCase):
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
         writer = WriterCSV()
-        self.user_file = writer.write(sudoku, "d:\\uno\\xfilec.csv")  
-        self.assertTrue(writer.write(sudoku, "d:\\uno\\xfilec.csv"))
+        self.user_file = writer.write(sudoku, "xfilec.csv")  
+        self.assertTrue(writer.write(sudoku, "xfilec.csv"))
         
     def test_to_verify_if_file_already_exist_write_method_for_TXT_creates_a_Newone(self):
         sudoku = {
@@ -125,8 +125,8 @@ class TestWriter(unittest.TestCase):
             "I1":'.', "I2":'.', "I3":'6', "I4":'4', "I5":'2', "I6":'3', "I7":'5', "I8":'9', "I9":'7'
             }
         writer = WriterTXT()    
-        self.user_file = writer.write(sudoku, "d:\\uno\\xfilec1.txt")
-        self.assertTrue(writer.write(sudoku, "d:\\uno\\xfilec1.txt")) 
+        self.user_file = writer.write(sudoku, "xfilec1.txt")
+        self.assertTrue(writer.write(sudoku, "xfilec1.txt")) 
          
     def tearDown(self):
         if os.path.isfile("file2.txt"):
@@ -137,12 +137,12 @@ class TestWriter(unittest.TestCase):
             os.remove("file3.csv")
         if os.path.isfile("filec.csv"):
             os.remove("filec.csv") 
-        if os.path.isfile("d:\\uno\\xfilec.csv"):
-            filelist = glob.glob("d:\\uno\\*.csv")
+        if os.path.isfile("xfilec.csv"):
+            filelist = glob.glob("*.csv")
             for f in filelist:
                 os.remove(f)    
-        if os.path.isfile("d:\\uno\\xfilec1.txt"):
-            filelist = glob.glob("d:\\uno\\*.txt")
+        if os.path.isfile("xfilec1.txt"):
+            filelist = glob.glob("*.txt")
             for f in filelist:
                 os.remove(f)     
 
