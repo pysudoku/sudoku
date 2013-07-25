@@ -24,7 +24,6 @@ class AlgorithmFactory(object):
             return PeterNorvigAlgorithm()
         if(self.settings == AlgorithmType.BACK_TRACKING):
             return BackTrackingAdapter()
-        
         if(self.settings == AlgorithmType.RECURSIVE):
             return Recursive()
         

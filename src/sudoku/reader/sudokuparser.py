@@ -19,7 +19,7 @@ class SudokuParser:
 
 	def parse_puzzle(self, file_name):
 		if not file_name.endswith(self.extension):
-			raise FileFormatError(self.extension)
+			raise FileFormatError("Invalid file format. '{}' file expected.".format(self.extension))
 		with self.open_sudoku_file(file_name) as (input_file, error):
 			if error:
 				raise error

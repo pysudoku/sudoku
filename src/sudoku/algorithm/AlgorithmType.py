@@ -10,4 +10,4 @@ class AlgorithmType(object):
     '''
     PETER_NORVIG = "Peter Norvig"
     RECURSIVE = "Recursive"
-    BACK_TRACKING = "Back tracking"
+    BACK_TRACKING = "Backtracking"

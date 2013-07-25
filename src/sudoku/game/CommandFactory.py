@@ -14,6 +14,11 @@ from sudoku.game.stopCommand import StopCommand
 from sudoku.game.pauseCommand import PauseCommand
 from sudoku.game.SetValueCommand import SetValueCommand
 from sudoku.game.RestartGameCommand import RestartGameCommand
+from sudoku.game.SolveGame import SolveGameCommand
+from sudoku.game.Import import ImportCommand
+from sudoku.game.SaveGame import SaveGameCommand
+from sudoku.game.OpenGame import OpenGameCommand
+from sudoku.game.Export import ExportCommand
 
 class CommandFactory(object):
     '''
@@ -30,6 +35,11 @@ class CommandFactory(object):
     START_COMMAND = "start"
     STOP_COMMAND = "stop"
     PAUSE_COMMAND = "pause"
+    SOLVE_COMMAND = "solve"
+    IMPORT_COMMAND = "import"
+    EXPORT_COMMAND = "export"
+    SAVE_COMMAND = 'save'
+    OPEN_COMMAND = 'open'
 
     def __init__(self, game):
         '''
@@ -64,6 +74,16 @@ class CommandFactory(object):
             cmd = StopCommand(params)
         elif self.PAUSE_COMMAND == cmdName:
             cmd = PauseCommand(params)
+        elif self.SOLVE_COMMAND == cmdName:
+            cmd = SolveGameCommand(params)
+        elif self.IMPORT_COMMAND == cmdName:
+            cmd = ImportCommand(params)
+        elif self.EXPORT_COMMAND == cmdName:
+            cmd = ExportCommand(params)
+        elif self.SAVE_COMMAND == cmdName:
+            cmd = SaveGameCommand(params)
+        elif self.OPEN_COMMAND == cmdName:
+            cmd = OpenGameCommand(params)
         
         cmd.set_game(self.game)
 

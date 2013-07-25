@@ -14,9 +14,15 @@ from sudoku.game.SetValueCommand import SetValueCommand
 from sudoku.game.startCommand import StartCommand
 from sudoku.game.stopCommand import StopCommand
 from sudoku.game.pauseCommand import PauseCommand
+from sudoku.game.SolveGame import SolveGameCommand
+from sudoku.game.Import import ImportCommand
+from sudoku.game.Export import ExportCommand
+from sudoku.game.SaveGame import SaveGameCommand
+from sudoku.game.OpenGame import OpenGameCommand
 from sudoku.game.Quit import QuitCommand
 from sudoku.game import PrintCommand
 from sudoku.game.PrintCommand import PrintBoardCommand
+
 
 
 class TestCommandFactory(unittest.TestCase):
@@ -25,6 +31,10 @@ class TestCommandFactory(unittest.TestCase):
         self.readconfig_parameters = {'fileName':"test.xml"}
         self.hint_parameters = {"row": 'B', "column": 3}
         self.set_value_parameters = {"row": 'B', "column": 3, "value": 5}
+        self.import_parameter = {"input":""}
+        self.export_parameter = {"output":""}
+        self.open_game_parameter = {"file":""}
+        self.save_game_parameter = {"file":""}
 
     def test_given_cmd_about_then_should_get_the_about_cmd_properly(self):
         game = Game()
@@ -93,6 +103,42 @@ class TestCommandFactory(unittest.TestCase):
         cmd = factory.getCommand("print", None)
         
         self.assertTrue(isinstance(cmd, PrintBoardCommand))
+        
+    def test_a_SolveGameCommand_instance_should_be_returned_when_the_command_is_requested_to_the_factory(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("solve", None)
+        
+        self.assertTrue(isinstance(cmd, SolveGameCommand))
+
+    def test_an_ImportCommand_instance_should_be_returned_when_the_command_is_requested_to_the_factory(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("import", self.import_parameter)
+        
+        self.assertTrue(isinstance(cmd, ImportCommand))
+
+    def test_an_ExportCommand_instance_should_be_returned_when_the_command_is_requested_to_the_factory(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("export", self.export_parameter)
+        
+        self.assertTrue(isinstance(cmd, ExportCommand))
+
+    def test_a_SaveCommand_instance_should_be_returned_when_the_command_is_requested_to_the_factory(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("save", self.save_game_parameter)
+        
+        self.assertTrue(isinstance(cmd, SaveGameCommand))
+
+    def test_an_OpenCommand_instance_should_be_returned_when_the_command_is_requested_to_the_factory(self):
+        game = Game()
+        factory = CommandFactory(game)
+        cmd = factory.getCommand("open", self.open_game_parameter)
+        
+        self.assertTrue(isinstance(cmd, OpenGameCommand))
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
