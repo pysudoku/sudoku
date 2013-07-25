@@ -7,6 +7,7 @@ from sudoku.game.SudokuCommand import SudokuCommand
 from sudoku.model.sudokutable import SudokuBoard
 from sudoku.game.exceptions.InvalidCmdParameterException import InvalidCmdParametersException
 
+
 class GenerateGameCommand(SudokuCommand):
     '''
     classdocs

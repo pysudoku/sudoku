@@ -115,8 +115,8 @@ class Console(object):
                     self.execute_command(cmd)
                     self.execute_command(print_cmd)
                 except CellNotEditableException:
-                    print("Cell is not editable!!!")
-                    self.execute_command(print_cmd)
+                    print("Cell is not editable")
+
                 except Exception as e:
                     print("Ooops unexpected Exception ", e)
 
