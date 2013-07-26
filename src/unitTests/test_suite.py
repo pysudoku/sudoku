@@ -48,6 +48,7 @@ from unitTests.game.test_save_command import TestSaveGameCommand
 from unitTests.game.test_open_command import TestOpenGameCommand
 from unitTests.game.test_import import TestImportCommand
 from unitTests.game.test_export import TestExportCommand
+from unitTests.writer.TestWriteFactory import TestWriterFactory
 
 def main():
     suite = unittest.TestSuite()
@@ -90,6 +91,7 @@ def main():
     suite.addTest(unittest.makeSuite(TestOpenGameCommand))
     suite.addTest(unittest.makeSuite(TestImportCommand))
     suite.addTest(unittest.makeSuite(TestExportCommand))
+    suite.addTest(unittest.makeSuite(TestWriterFactory))
 
     unittest.TextTestRunner(verbosity = 2).run(suite)
     

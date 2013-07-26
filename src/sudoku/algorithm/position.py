@@ -17,12 +17,8 @@ class Position:
         :maxfila: is a constant that contains the number of total rows in Sudoku
 
         """
-        if fila < 0:
-            self.row = 0
-        elif fila >= self.maxfila:
-            self.row = -1
-        else:
-            self.row = fila
+       
+        self.row = fila
 
     def setCol(self, col):
         """
@@ -31,12 +27,7 @@ class Position:
         :column: is the number of column to execute a task
         :maxcol: is a constant that contains the number of total columns in Sudoku 
         """
-        if col < 0:
-            self.column = 0
-        elif col >= self.maxcol:
-            self.column = -1
-        else:
-            self.column = col
+        self.column = col
         
 
     def getFila(self):
